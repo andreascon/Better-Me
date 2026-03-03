@@ -9,6 +9,14 @@
   --accent-light: #d4a574;
   --muted: #8b7355;
   --hero-overlay: rgba(30, 20, 10, 0.45);
+  --quadrant-quality: #6b8f5e;
+  --quadrant-pitfall: #c2694a;
+  --quadrant-challenge: #5b7fa5;
+  --quadrant-allergy: #b47a3e;
+  --quadrant-quality-light: #e8f0e5;
+  --quadrant-pitfall-light: #f5e6df;
+  --quadrant-challenge-light: #e0e9f0;
+  --quadrant-allergy-light: #f5ece0;
 }
 
 @theme inline {
@@ -20,6 +28,14 @@
   --color-accent-light: var(--accent-light);
   --color-muted: var(--muted);
   --color-hero-overlay: var(--hero-overlay);
+  --color-quadrant-quality: var(--quadrant-quality);
+  --color-quadrant-pitfall: var(--quadrant-pitfall);
+  --color-quadrant-challenge: var(--quadrant-challenge);
+  --color-quadrant-allergy: var(--quadrant-allergy);
+  --color-quadrant-quality-light: var(--quadrant-quality-light);
+  --color-quadrant-pitfall-light: var(--quadrant-pitfall-light);
+  --color-quadrant-challenge-light: var(--quadrant-challenge-light);
+  --color-quadrant-allergy-light: var(--quadrant-allergy-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

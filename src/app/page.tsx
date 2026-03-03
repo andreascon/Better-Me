@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const UNSPLASH_IMAGE_URL =
   "https://images.unsplash.com/photo-1516676839530-135a545cce02";
@@ -8,33 +9,62 @@ interface AppCardProps {
   description: string;
   icon: string;
   category: string;
+  status: "available" | "coming-soon";
+  href?: string;
 }
 
-function AppCard({ title, description, icon, category }: AppCardProps) {
-  return (
+function AppCard({ title, description, icon, category, status, href }: AppCardProps) {
+  const card = (
     <div className="group rounded-2xl border border-card-border bg-card-bg p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
       <div className="mb-4 flex items-center justify-between">
         <span className="text-4xl">{icon}</span>
-        <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-          Coming Soon
-        </span>
+        {status === "available" ? (
+          <span className="rounded-full bg-quadrant-quality/10 px-3 py-1 text-xs font-medium text-quadrant-quality">
+            Try Now
+          </span>
+        ) : (
+          <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+            Coming Soon
+          </span>
+        )}
       </div>
       <p className="mb-1 text-sm font-medium uppercase tracking-wide text-muted">
         {category}
       </p>
       <h3 className="mb-2 text-xl font-semibold text-foreground">{title}</h3>
       <p className="text-sm leading-relaxed text-muted">{description}</p>
+      {status === "available" && (
+        <p className="mt-4 text-sm font-medium text-accent group-hover:underline">
+          Get started &rarr;
+        </p>
+      )}
     </div>
   );
+
+  if (href) {
+    return <Link href={href}>{card}</Link>;
+  }
+
+  return card;
 }
 
 const apps: AppCardProps[] = [
+  {
+    title: "Core Quadrants",
+    description:
+      "Discover the hidden dynamics behind your greatest strengths — and what trips you up. Based on Daniel Ofman's model.",
+    icon: "\u{1F3AF}",
+    category: "Self-Awareness",
+    status: "available",
+    href: "/ofman",
+  },
   {
     title: "Habit Tracker",
     description:
       "Build lasting habits with daily tracking, streaks, and gentle reminders to keep you on course.",
     icon: "\u{1F331}",
     category: "Habits",
+    status: "coming-soon",
   },
   {
     title: "Mindful Moments",
@@ -42,6 +72,7 @@ const apps: AppCardProps[] = [
       "Guided breathing exercises and meditation sessions to bring calm and clarity to your day.",
     icon: "\u{1F9D8}",
     category: "Mindfulness",
+    status: "coming-soon",
   },
   {
     title: "Move & Thrive",
@@ -49,6 +80,7 @@ const apps: AppCardProps[] = [
       "Simple fitness routines and activity logging designed for sustainable well-being, not perfection.",
     icon: "\u{1F3C3}",
     category: "Fitness",
+    status: "coming-soon",
   },
   {
     title: "Daily Journal",
@@ -56,6 +88,7 @@ const apps: AppCardProps[] = [
       "A private space for reflection, gratitude, and capturing the moments that shape who you are.",
     icon: "\u{1F4D3}",
     category: "Journaling",
+    status: "coming-soon",
   },
 ];
 
@@ -82,7 +115,7 @@ export default function Home() {
             calm, staying active, and reflecting on your journey.
           </p>
           <p className="text-sm tracking-wide text-white/60">
-            Your self-improvement companion &mdash; coming soon
+            Your self-improvement companion
           </p>
         </div>
       </section>
@@ -91,14 +124,14 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="mb-12 text-center">
           <h2 className="mb-3 text-3xl font-bold text-foreground sm:text-4xl">
-            What&apos;s Coming
+            Your Tools
           </h2>
           <p className="mx-auto max-w-xl text-muted">
-            We&apos;re crafting a suite of thoughtful tools to support your
-            personal growth. Here&apos;s a glimpse of what&apos;s ahead.
+            A suite of thoughtful tools to support your personal growth. Start
+            with what&apos;s available and stay tuned for more.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {apps.map((app) => (
             <AppCard key={app.title} {...app} />
           ))}
