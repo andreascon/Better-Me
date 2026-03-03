@@ -14,26 +14,33 @@ interface AppCardProps {
 }
 
 function AppCard({ title, description, icon, category, status, href }: AppCardProps) {
+  const isAvailable = status === "available";
   const card = (
-    <div className="group rounded-2xl border border-card-border bg-card-bg p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+    <div
+      className={`group rounded-2xl border p-6 transition-all duration-300 ${
+        isAvailable
+          ? "border-card-border bg-card-bg shadow-sm hover:shadow-md hover:-translate-y-1"
+          : "border-card-border/50 bg-card-bg/50 opacity-55 grayscale-[30%]"
+      }`}
+    >
       <div className="mb-4 flex items-center justify-between">
-        <span className="text-4xl">{icon}</span>
-        {status === "available" ? (
+        <span className={`text-4xl ${!isAvailable ? "opacity-60" : ""}`}>{icon}</span>
+        {isAvailable ? (
           <span className="rounded-full bg-quadrant-quality/10 px-3 py-1 text-xs font-medium text-quadrant-quality">
             Try Now
           </span>
         ) : (
-          <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-medium text-muted/60">
             Coming Soon
           </span>
         )}
       </div>
-      <p className="mb-1 text-sm font-medium uppercase tracking-wide text-muted">
+      <p className={`mb-1 text-sm font-medium uppercase tracking-wide ${isAvailable ? "text-muted" : "text-muted/50"}`}>
         {category}
       </p>
-      <h3 className="mb-2 text-xl font-semibold text-foreground">{title}</h3>
-      <p className="text-sm leading-relaxed text-muted">{description}</p>
-      {status === "available" && (
+      <h3 className={`mb-2 text-xl font-semibold ${isAvailable ? "text-foreground" : "text-foreground/50"}`}>{title}</h3>
+      <p className={`text-sm leading-relaxed ${isAvailable ? "text-muted" : "text-muted/50"}`}>{description}</p>
+      {isAvailable && (
         <p className="mt-4 text-sm font-medium text-accent group-hover:underline">
           Get started &rarr;
         </p>

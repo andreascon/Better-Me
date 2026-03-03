@@ -84,8 +84,8 @@ export default function QuadrantDiagram({
   const positions = {
     quality: { x: pad, y: pad },
     pitfall: { x: pad + boxW + gap, y: pad },
-    challenge: { x: pad, y: pad + boxH + gap },
-    allergy: { x: pad + boxW + gap, y: pad + boxH + gap },
+    allergy: { x: pad, y: pad + boxH + gap },
+    challenge: { x: pad + boxW + gap, y: pad + boxH + gap },
   };
 
   function getTraitName(pos: QuadrantPosition): string {
@@ -191,7 +191,7 @@ export default function QuadrantDiagram({
       y2 = tp.y + boxH / 2;
       lx = (x1 + x2) / 2;
       ly = y1 - 10;
-    } else if (from === "pitfall" && to === "allergy") {
+    } else if (from === "pitfall" && to === "challenge") {
       // Right vertical ↓
       x1 = fp.x + boxW / 2;
       y1 = fp.y + boxH + 8;
@@ -199,7 +199,7 @@ export default function QuadrantDiagram({
       y2 = tp.y - 8;
       lx = x1 + 15;
       ly = (y1 + y2) / 2 + 4;
-    } else if (from === "allergy" && to === "challenge") {
+    } else if (from === "challenge" && to === "allergy") {
       // Bottom horizontal ←
       x1 = fp.x - 8;
       y1 = fp.y + boxH / 2;
@@ -208,7 +208,7 @@ export default function QuadrantDiagram({
       lx = (x1 + x2) / 2;
       ly = y1 + 18;
     } else {
-      // Left vertical ↑ (challenge → quality)
+      // Left vertical ↑ (allergy → quality)
       x1 = fp.x + boxW / 2;
       y1 = fp.y - 8;
       x2 = tp.x + boxW / 2;
@@ -273,9 +273,9 @@ export default function QuadrantDiagram({
         </defs>
 
         {renderArrow("quality", "pitfall", "too much of")}
-        {renderArrow("pitfall", "allergy", "positive opposite")}
-        {renderArrow("allergy", "challenge", "too much of")}
-        {renderArrow("challenge", "quality", "positive opposite")}
+        {renderArrow("pitfall", "challenge", "positive opposite")}
+        {renderArrow("challenge", "allergy", "too much of")}
+        {renderArrow("allergy", "quality", "positive opposite")}
 
         {renderBox("quality")}
         {renderBox("pitfall")}
