@@ -112,7 +112,7 @@ function AssessmentContent() {
       <HeroSection />
 
       {/* Video */}
-      <VideoSection />
+      <VideoSection videoSrc="/video/ofman-quadrants.mp4" />
 
       {/* Assessment Section */}
       <section
