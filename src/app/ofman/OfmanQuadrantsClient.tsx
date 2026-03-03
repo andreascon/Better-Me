@@ -59,7 +59,7 @@ function AssessmentContent() {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(reducer, initialState);
   const quadrant = state.selectedQuadrantId
-    ? getQuadrantById(state.selectedQuadrantId)
+    ? (getQuadrantById(state.selectedQuadrantId) ?? null)
     : null;
 
   // Check for shared URL on mount
