@@ -249,7 +249,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Resilient",
       description:
-        "You bounce back from setbacks with remarkable strength, maintaining your course despite obstacles and adversity.",
+        "You recover quickly from setbacks and disappointments, regaining your composure and confidence when others would stay knocked down.",
     },
     pitfall: {
       trait: "Stubborn",
@@ -485,7 +485,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Diplomatic",
       description:
-        "You navigate sensitive situations with grace, finding ways to address issues without creating unnecessary conflict.",
+        "You navigate politically sensitive situations with grace, balancing competing interests and finding solutions that protect relationships.",
     },
     pitfall: {
       trait: "Conflict-avoidant",
@@ -576,7 +576,7 @@ export const quadrants: QuadrantData[] = [
         "Your growth area is engaging in healthy conflict — understanding that productive disagreement often leads to better outcomes.",
     },
     allergy: {
-      trait: "Aggressive",
+      trait: "Combative",
       description:
         "People who create unnecessary conflict, raise their voice, or use intimidation likely make you deeply uncomfortable.",
     },
@@ -602,9 +602,9 @@ export const quadrants: QuadrantData[] = [
         "Your growth area is standing your ground — sharing your dissenting view when it matters, even if it creates tension.",
     },
     allergy: {
-      trait: "Domineering",
+      trait: "Bulldozing",
       description:
-        "People who bulldoze over everyone else's input and insist on their way likely trigger strong resistance in you.",
+        "People who steamroll over everyone else's input and insist on their way likely trigger strong resistance in you.",
     },
     growthTip:
       "In your next team meeting, voice one opinion you'd normally keep to yourself. Your perspective matters as much as anyone's.",
@@ -667,7 +667,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Tactful",
       description:
-        "You deliver sensitive messages with care and timing, protecting others' dignity while still communicating truth.",
+        "You choose your words and timing carefully, delivering difficult messages in a way that preserves others' dignity.",
     },
     pitfall: {
       trait: "Evasive",
@@ -695,7 +695,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Detail-oriented",
       description:
-        "You notice what others miss, bringing precision and thoroughness that ensures quality in everything you produce.",
+        "You spot the specifics others miss — inconsistencies, typos, subtle errors — bringing microscopic precision to everything you touch.",
     },
     pitfall: {
       trait: "Perfectionist",
@@ -721,7 +721,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Organized",
       description:
-        "You create order from chaos, building systems and structures that help everything run smoothly.",
+        "You create external order from chaos — building systems, processes, and structures that help teams and projects run smoothly.",
     },
     pitfall: {
       trait: "Rigid",
@@ -750,9 +750,9 @@ export const quadrants: QuadrantData[] = [
         "You set your sights high and pursue meaningful goals with energy and determination.",
     },
     pitfall: {
-      trait: "Ruthless",
+      trait: "Relentless",
       description:
-        "When overdone, ambition becomes ruthlessness — pursuing success at the cost of relationships and ethics.",
+        "When overdone, ambition becomes relentlessness — chasing the next goal so intensely that you neglect rest, relationships, and perspective.",
     },
     challenge: {
       trait: "Appreciation",
@@ -851,7 +851,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Reliable",
       description:
-        "You follow through on commitments consistently — when you say you'll do something, people know it will happen.",
+        "You honour every commitment you make — when you say you'll do something, people know it will happen, no reminders needed.",
     },
     pitfall: {
       trait: "Predictable",
@@ -929,7 +929,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Disciplined",
       description:
-        "You maintain consistent habits and routines, showing remarkable self-control in pursuit of your goals.",
+        "You maintain consistent personal habits and routines, showing remarkable self-control and follow-through day after day.",
     },
     pitfall: {
       trait: "Inflexible",
@@ -955,7 +955,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Quality-conscious",
       description:
-        "You hold everything to a high standard, refusing to let subpar work represent you or your team.",
+        "You hold the overall standard of work high, refusing to let subpar output represent you or your team — it's about the bar, not just the details.",
     },
     pitfall: {
       trait: "Never Finished",
@@ -984,9 +984,9 @@ export const quadrants: QuadrantData[] = [
         "You accomplish a remarkable amount, consistently converting your time and energy into tangible results.",
     },
     pitfall: {
-      trait: "Burnout-prone",
+      trait: "Overworking",
       description:
-        "When overdone, productivity becomes unsustainable — pushing yourself until your body or mind forces you to stop.",
+        "When overdone, productivity becomes overworking — filling every moment with output until rest feels like failure.",
     },
     challenge: {
       trait: "Rest and Renewal",
@@ -1010,9 +1010,9 @@ export const quadrants: QuadrantData[] = [
         "You stay laser-focused on outcomes, ensuring that effort translates into measurable achievements.",
     },
     pitfall: {
-      trait: "Ends-justify-means",
+      trait: "Output-fixated",
       description:
-        "When overdone, results focus becomes ruthless — achieving targets at the expense of people, relationships, or ethics.",
+        "When overdone, results focus becomes output fixation — valuing only measurable deliverables while ignoring the learning, trust, and growth that happen along the way.",
     },
     challenge: {
       trait: "Process Appreciation",
@@ -1116,9 +1116,9 @@ export const quadrants: QuadrantData[] = [
         "You are genuinely yourself in all situations, refusing to wear masks or play roles that don't reflect who you really are.",
     },
     pitfall: {
-      trait: "Blunt",
+      trait: "Unfiltered",
       description:
-        "When overdone, authenticity becomes bluntness — using 'I'm just being honest' as an excuse for hurtful directness.",
+        "When overdone, authenticity becomes being unfiltered — using 'I'm just being real' as an excuse for disregarding how your words land.",
     },
     challenge: {
       trait: "Consideration",
@@ -1199,9 +1199,9 @@ export const quadrants: QuadrantData[] = [
         "When overdone, curiosity becomes intrusiveness — probing into areas that aren't your business or losing focus by chasing every interesting thread.",
     },
     challenge: {
-      trait: "Focus",
+      trait: "Discretion",
       description:
-        "Your growth area is directed curiosity — channeling your questioning mind toward what matters most right now.",
+        "Your growth area is respectful discretion — knowing which questions to pursue and which boundaries to honour.",
     },
     allergy: {
       trait: "Closed-minded",
@@ -1330,9 +1330,9 @@ export const quadrants: QuadrantData[] = [
         "When overdone, assertiveness becomes aggression — bulldozing others' feelings and shutting down dialogue.",
     },
     challenge: {
-      trait: "Receptiveness",
+      trait: "Empathetic Listening",
       description:
-        "Your growth area is developing receptiveness — genuinely listening to and absorbing others' perspectives before responding.",
+        "Your growth area is empathetic listening — genuinely absorbing others' perspectives and feelings before responding.",
     },
     allergy: {
       trait: "Spineless",
@@ -1377,9 +1377,9 @@ export const quadrants: QuadrantData[] = [
         "You are naturally thoughtful and mindful of others' needs, anticipating how your actions affect those around you.",
     },
     pitfall: {
-      trait: "Over-accommodating",
+      trait: "Self-neglecting",
       description:
-        "When overdone, consideration becomes self-erasure — constantly putting others first until your own needs disappear entirely.",
+        "When overdone, consideration becomes self-neglect — constantly putting others first until your own needs disappear entirely.",
     },
     challenge: {
       trait: "Self-advocacy",
@@ -1452,7 +1452,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Persevering",
       description:
-        "You maintain effort over long stretches, pushing through setbacks and difficulty with steady determination.",
+        "You keep going when the road is long and monotonous, sustaining effort over weeks and months where others would quit.",
     },
     pitfall: {
       trait: "Grinding",
@@ -1504,7 +1504,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Prepared",
       description:
-        "You are consistently well-organized and ready for tasks, thinking ahead so you can handle whatever comes.",
+        "You think ahead and anticipate what's coming, arriving ready with plans, materials, and contingencies so nothing catches you off guard.",
     },
     pitfall: {
       trait: "Over-preparing",
@@ -1559,9 +1559,9 @@ export const quadrants: QuadrantData[] = [
         "You adapt readily to change and new circumstances, staying effective even when plans shift beneath you.",
     },
     pitfall: {
-      trait: "Shapeless",
+      trait: "Non-committal",
       description:
-        "When overdone, flexibility becomes a lack of conviction — bending so much that people can't tell what you actually stand for.",
+        "When overdone, flexibility becomes non-committal — bending so much that people can't tell what you actually stand for.",
     },
     challenge: {
       trait: "Firmness",
