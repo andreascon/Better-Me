@@ -102,6 +102,16 @@ const apps: AppCardProps[] = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-background font-sans">
+      {/* Navigation */}
+      <nav className="absolute top-0 right-0 z-20 px-6 py-4">
+        <Link
+          href="/about"
+          className="text-sm font-medium text-white/80 transition-colors hover:text-white"
+        >
+          About
+        </Link>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative flex h-[85vh] min-h-[600px] items-center justify-center overflow-hidden">
         <Image
