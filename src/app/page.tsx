@@ -167,7 +167,16 @@ export default function Home() {
             Unsplash
           </a>
         </p>
-        <p className="mt-2">&copy; 2026 Better-Me. All rights reserved.</p>
+        <p className="mt-2">
+          &copy; 2026 Better-Me. All rights reserved.
+          <span className="mx-2">·</span>
+          <Link
+            href="/about"
+            className="underline underline-offset-2 transition-colors hover:text-accent"
+          >
+            About
+          </Link>
+        </p>
       </footer>
     </main>
   );
