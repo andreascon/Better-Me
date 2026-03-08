@@ -48,6 +48,12 @@ const strengthOrder: StepKey[] = [
   "challenge",
   "allergy",
 ];
+const pitfallOrder: StepKey[] = [
+  "pitfall",
+  "coreQuality",
+  "challenge",
+  "allergy",
+];
 const allergyOrder: StepKey[] = [
   "allergy",
   "challenge",
@@ -62,11 +68,41 @@ const relationshipLabels: Record<EntryPath, string[]> = {
     "To stay balanced, you need to develop this challenge…",
     "And this is your allergy — the trait that triggers you in others.",
   ],
+  pitfall: [
+    "This is your pitfall — when your strength goes too far.",
+    "Underneath this shadow lies your core quality — your true strength.",
+    "To stay balanced, you need to develop this challenge…",
+    "And this is your allergy — the trait that triggers you in others.",
+  ],
   allergy: [
     "This is what irritates you most in others — your allergy.",
     "The positive side of your allergy is actually this challenge you need…",
     "Your challenge is the antidote to this pitfall…",
     "And at the heart of it all lies your core quality — your greatest strength.",
+  ],
+};
+
+/** Self-reflection prompts for each quadrant element, inspired by Ofman's methodology */
+const reflectionPrompts: Record<StepKey, string[]> = {
+  coreQuality: [
+    "When do others compliment you on this quality?",
+    "How does this strength show up in your daily life?",
+    "Can you recall a time this quality helped you or someone around you?",
+  ],
+  pitfall: [
+    "Can you think of a moment when this quality went too far?",
+    "How do others react when you overdo your strength?",
+    "What signals tell you that you've crossed from strength into excess?",
+  ],
+  challenge: [
+    "What would it look like to practice this quality more often?",
+    "Who do you know that models this quality well — and what can you learn from them?",
+    "What small step could you take this week to develop this side of yourself?",
+  ],
+  allergy: [
+    "Who in your life displays this trait — and why does it bother you so much?",
+    "Could this person's behaviour be a mirror of the challenge you need to develop?",
+    "Next time this irritation arises, how could you respond differently?",
   ],
 };
 
@@ -77,7 +113,12 @@ export default function StepReveal({
   onNext,
   onComplete,
 }: StepRevealProps) {
-  const order = entryPath === "strength" ? strengthOrder : allergyOrder;
+  const order =
+    entryPath === "strength"
+      ? strengthOrder
+      : entryPath === "pitfall"
+        ? pitfallOrder
+        : allergyOrder;
   const totalSteps = 4;
   const isLastStep = revealedSteps >= totalSteps;
 
@@ -106,6 +147,7 @@ export default function StepReveal({
           const element = quadrant[key];
           const relationship = relationshipLabels[entryPath][i];
           const isLatest = i === revealedSteps - 1;
+          const prompts = reflectionPrompts[key];
 
           return (
             <div
@@ -141,6 +183,25 @@ export default function StepReveal({
               <p className="text-sm leading-relaxed text-muted">
                 {element.description}
               </p>
+
+              {/* Self-reflection prompt (only on the latest revealed step) */}
+              {isLatest && (
+                <div className="mt-4 rounded-xl border border-card-border/50 bg-background/60 p-4">
+                  <p className="mb-2 text-xs font-semibold text-accent">
+                    🪞 Reflect on this
+                  </p>
+                  <ul className="space-y-1.5">
+                    {prompts.map((prompt, pi) => (
+                      <li
+                        key={pi}
+                        className="text-xs leading-relaxed text-muted"
+                      >
+                        {prompt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           );
         })}

@@ -17,7 +17,7 @@ export interface QuadrantData {
 
 export type AssessmentPhase = "intro" | "picking" | "stepping" | "complete";
 
-export type EntryPath = "strength" | "allergy";
+export type EntryPath = "strength" | "allergy" | "pitfall";
 
 export interface AssessmentState {
   phase: AssessmentPhase;

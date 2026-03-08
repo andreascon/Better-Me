@@ -16,12 +16,17 @@ interface TraitPickerProps {
 export default function TraitPicker({ mode, onSelectTrait }: TraitPickerProps) {
   const [search, setSearch] = useState("");
 
-  const traitLabel = mode === "strength" ? "strength" : "allergy";
+  const traitLabel =
+    mode === "strength" ? "strength" : mode === "pitfall" ? "pitfall" : "allergy";
 
   const filtered = search.trim()
     ? quadrants.filter((q) => {
         const trait =
-          mode === "strength" ? q.coreQuality.trait : q.allergy.trait;
+          mode === "strength"
+            ? q.coreQuality.trait
+            : mode === "pitfall"
+              ? q.pitfall.trait
+              : q.allergy.trait;
         return trait.toLowerCase().includes(search.toLowerCase());
       })
     : null;
@@ -44,7 +49,9 @@ export default function TraitPicker({ mode, onSelectTrait }: TraitPickerProps) {
       <h2 className="mb-2 text-2xl font-bold text-foreground">
         {mode === "strength"
           ? "What's your greatest strength?"
-          : "What annoys you most in others?"}
+          : mode === "pitfall"
+            ? "What pattern do you recognize in yourself?"
+            : "What annoys you most in others?"}
       </h2>
       <p className="mb-6 text-sm text-muted">
         Pick the {traitLabel} that resonates most with you.
@@ -54,7 +61,7 @@ export default function TraitPicker({ mode, onSelectTrait }: TraitPickerProps) {
       <div className="relative mb-6">
         <input
           type="text"
-          placeholder={`Search ${quadrants.length} ${traitLabel === "strength" ? "strengths" : "allergies"}...`}
+          placeholder={`Search ${quadrants.length} ${traitLabel === "strength" ? "strengths" : traitLabel === "pitfall" ? "pitfalls" : "allergies"}...`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-xl border border-card-border bg-card-bg px-4 py-3 pl-10 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
@@ -89,7 +96,11 @@ export default function TraitPicker({ mode, onSelectTrait }: TraitPickerProps) {
             <div className="flex flex-wrap gap-2">
               {items.map((q) => {
                 const trait =
-                  mode === "strength" ? q.coreQuality.trait : q.allergy.trait;
+                  mode === "strength"
+                    ? q.coreQuality.trait
+                    : mode === "pitfall"
+                      ? q.pitfall.trait
+                      : q.allergy.trait;
                 return (
                   <button
                     key={q.id}
@@ -106,7 +117,7 @@ export default function TraitPicker({ mode, onSelectTrait }: TraitPickerProps) {
 
         {groupedFiltered && groupedFiltered.length === 0 && (
           <p className="py-8 text-center text-sm text-muted">
-            No matching {traitLabel === "strength" ? "strengths" : "allergies"}{" "}
+            No matching {traitLabel === "strength" ? "strengths" : traitLabel === "pitfall" ? "pitfalls" : "allergies"}{" "}
             found. Try a different search term.
           </p>
         )}

@@ -23,13 +23,24 @@ function getVisibility(
     "challenge",
     "allergy",
   ];
+  const pitfallOrder: QuadrantPosition[] = [
+    "pitfall",
+    "quality",
+    "challenge",
+    "allergy",
+  ];
   const allergyOrder: QuadrantPosition[] = [
     "allergy",
     "challenge",
     "pitfall",
     "quality",
   ];
-  const order = entryPath === "allergy" ? allergyOrder : strengthOrder;
+  const order =
+    entryPath === "allergy"
+      ? allergyOrder
+      : entryPath === "pitfall"
+        ? pitfallOrder
+        : strengthOrder;
   const stepIndex = order.indexOf(position);
 
   if (stepIndex >= revealedSteps) return "hidden";
@@ -48,11 +59,11 @@ function isArrowVisible(
   return fromVis !== "hidden" && toVis !== "hidden";
 }
 
-const COLORS: Record<QuadrantPosition, { bg: string; text: string }> = {
-  quality: { bg: "#6b8f5e", text: "#fff" },
-  pitfall: { bg: "#c2694a", text: "#fff" },
-  challenge: { bg: "#5b7fa5", text: "#fff" },
-  allergy: { bg: "#b47a3e", text: "#fff" },
+const COLORS: Record<QuadrantPosition, { bg: string; border: string; text: string }> = {
+  quality: { bg: "#6b8f5e", border: "#5a7a4f", text: "#fff" },
+  pitfall: { bg: "#c2694a", border: "#a8573b", text: "#fff" },
+  challenge: { bg: "#5b7fa5", border: "#4a6b8e", text: "#fff" },
+  allergy: { bg: "#b47a3e", border: "#9a6832", text: "#fff" },
 };
 
 const LABELS: Record<QuadrantPosition, string> = {
@@ -63,10 +74,10 @@ const LABELS: Record<QuadrantPosition, string> = {
 };
 
 const SUBLABELS: Record<QuadrantPosition, string> = {
-  quality: "(Strength)",
-  pitfall: "(Too much)",
-  challenge: "(To develop)",
-  allergy: "(Irritant)",
+  quality: "Strength",
+  pitfall: "Too much",
+  challenge: "To develop",
+  allergy: "Irritant",
 };
 
 export default function QuadrantDiagram({
@@ -76,16 +87,18 @@ export default function QuadrantDiagram({
 }: QuadrantDiagramProps) {
   const boxW = 200;
   const boxH = 100;
-  const gap = 80;
-  const svgW = boxW * 2 + gap;
-  const svgH = boxH * 2 + gap + 40;
-  const pad = 20;
+  const gapX = 130;
+  const gapY = 110;
+  const pad = 30;
+
+  const svgW = boxW * 2 + gapX + pad * 2;
+  const svgH = boxH * 2 + gapY + pad * 2;
 
   const positions = {
     quality: { x: pad, y: pad },
-    pitfall: { x: pad + boxW + gap, y: pad },
-    allergy: { x: pad, y: pad + boxH + gap },
-    challenge: { x: pad + boxW + gap, y: pad + boxH + gap },
+    pitfall: { x: pad + boxW + gapX, y: pad },
+    allergy: { x: pad, y: pad + boxH + gapY },
+    challenge: { x: pad + boxW + gapX, y: pad + boxH + gapY },
   };
 
   function getTraitName(pos: QuadrantPosition): string {
@@ -106,8 +119,9 @@ export default function QuadrantDiagram({
     const { x, y } = positions[pos];
     const vis = getVisibility(pos, revealedSteps, entryPath);
     const color = COLORS[pos];
-    const opacity = vis === "hidden" ? 0.15 : 1;
+    const opacity = vis === "hidden" ? 0.12 : 1;
     const trait = vis !== "hidden" ? getTraitName(pos) : "";
+    const isActive = vis === "active";
 
     return (
       <g
@@ -117,43 +131,57 @@ export default function QuadrantDiagram({
           transition: "opacity 600ms ease-out",
         }}
       >
+        {/* Shadow */}
+        <rect
+          x={x + 2}
+          y={y + 2}
+          width={boxW}
+          height={boxH}
+          rx={14}
+          fill="rgba(0,0,0,0.06)"
+        />
+        {/* Card */}
         <rect
           x={x}
           y={y}
           width={boxW}
           height={boxH}
-          rx={12}
+          rx={14}
           fill={color.bg}
-          stroke={vis === "active" ? "#fff" : "none"}
-          strokeWidth={vis === "active" ? 3 : 0}
+          stroke={isActive ? "#fff" : color.border}
+          strokeWidth={isActive ? 2.5 : 1}
         />
+        {/* Label */}
         <text
           x={x + boxW / 2}
-          y={y + (trait ? 32 : 40)}
+          y={y + (trait ? 30 : 40)}
           textAnchor="middle"
           fill={color.text}
-          fontSize={13}
+          fontSize={14}
           fontWeight={600}
+          letterSpacing="0.02em"
         >
           {LABELS[pos]}
         </text>
+        {/* Sublabel */}
         <text
           x={x + boxW / 2}
-          y={y + (trait ? 48 : 56)}
+          y={y + (trait ? 47 : 57)}
           textAnchor="middle"
           fill={color.text}
-          fontSize={10}
-          opacity={0.8}
+          fontSize={11}
+          opacity={0.7}
         >
           {SUBLABELS[pos]}
         </text>
+        {/* Trait name */}
         {trait && (
           <text
             x={x + boxW / 2}
-            y={y + 72}
+            y={y + 74}
             textAnchor="middle"
             fill={color.text}
-            fontSize={16}
+            fontSize={trait.length > 14 ? 13 : 17}
             fontWeight={700}
             style={{
               opacity: vis !== "hidden" ? 1 : 0,
@@ -183,45 +211,51 @@ export default function QuadrantDiagram({
       lx: number,
       ly: number;
 
+    const arrowGap = 14;
+
     if (from === "quality" && to === "pitfall") {
       // Top horizontal →
-      x1 = fp.x + boxW + 8;
+      x1 = fp.x + boxW + arrowGap;
       y1 = fp.y + boxH / 2;
-      x2 = tp.x - 8;
+      x2 = tp.x - arrowGap;
       y2 = tp.y + boxH / 2;
       lx = (x1 + x2) / 2;
-      ly = y1 - 10;
+      ly = y1 - 12;
     } else if (from === "pitfall" && to === "challenge") {
       // Right vertical ↓
       x1 = fp.x + boxW / 2;
-      y1 = fp.y + boxH + 8;
+      y1 = fp.y + boxH + arrowGap;
       x2 = tp.x + boxW / 2;
-      y2 = tp.y - 8;
-      lx = x1 + 15;
+      y2 = tp.y - arrowGap;
+      lx = x1 + 20;
       ly = (y1 + y2) / 2 + 4;
     } else if (from === "challenge" && to === "allergy") {
       // Bottom horizontal ←
-      x1 = fp.x - 8;
+      x1 = fp.x - arrowGap;
       y1 = fp.y + boxH / 2;
-      x2 = tp.x + boxW + 8;
+      x2 = tp.x + boxW + arrowGap;
       y2 = tp.y + boxH / 2;
       lx = (x1 + x2) / 2;
-      ly = y1 + 18;
+      ly = y1 + 16;
     } else {
       // Left vertical ↑ (allergy → quality)
       x1 = fp.x + boxW / 2;
-      y1 = fp.y - 8;
+      y1 = fp.y - arrowGap;
       x2 = tp.x + boxW / 2;
-      y2 = tp.y + boxH + 8;
-      lx = x1 - 15;
+      y2 = tp.y + boxH + arrowGap;
+      lx = x1 - 20;
       ly = (y1 + y2) / 2 + 4;
     }
+
+    // Measure approximate label width for the pill
+    const pillW = label.length * 7.5 + 20;
+    const pillH = 22;
 
     return (
       <g
         key={`${from}-${to}`}
         style={{
-          opacity: visible ? 0.6 : 0.1,
+          opacity: visible ? 0.7 : 0.08,
           transition: "opacity 600ms ease-out",
         }}
       >
@@ -230,17 +264,29 @@ export default function QuadrantDiagram({
           y1={y1}
           x2={x2}
           y2={y2}
-          stroke="#8b7355"
-          strokeWidth={1.5}
+          stroke="#a08b6f"
+          strokeWidth={1.2}
+          strokeDasharray="4 3"
           markerEnd="url(#arrowhead)"
+        />
+        {/* Pill background */}
+        <rect
+          x={lx - pillW / 2}
+          y={ly - pillH / 2 - 1}
+          width={pillW}
+          height={pillH}
+          rx={pillH / 2}
+          fill="#f5f0e8"
+          stroke="#d4c9b8"
+          strokeWidth={1}
         />
         <text
           x={lx}
-          y={ly}
+          y={ly + 4}
           textAnchor="middle"
-          fill="#8b7355"
-          fontSize={10}
-          fontStyle="italic"
+          fill="#6b5d4d"
+          fontSize={10.5}
+          fontWeight={500}
         >
           {label}
         </text>
@@ -249,26 +295,26 @@ export default function QuadrantDiagram({
   }
 
   return (
-    <div className="rounded-2xl border border-card-border bg-card-bg p-4">
-      <p className="mb-3 text-center text-sm font-semibold text-foreground">
+    <div className="rounded-2xl border border-card-border bg-card-bg p-5">
+      <p className="mb-4 text-center text-sm font-semibold text-foreground">
         Your Quadrant
       </p>
       <svg
-        viewBox={`0 0 ${svgW + pad * 2} ${svgH}`}
-        className="mx-auto w-full max-w-[500px]"
+        viewBox={`0 0 ${svgW} ${svgH}`}
+        className="mx-auto w-full max-w-[520px]"
         role="img"
         aria-label="Ofman's Core Quadrants diagram"
       >
         <defs>
           <marker
             id="arrowhead"
-            markerWidth="8"
-            markerHeight="6"
-            refX="7"
-            refY="3"
+            markerWidth="7"
+            markerHeight="5"
+            refX="6"
+            refY="2.5"
             orient="auto"
           >
-            <path d="M0,0 L8,3 L0,6" fill="#8b7355" />
+            <path d="M0,0 L7,2.5 L0,5" fill="#a08b6f" />
           </marker>
         </defs>
 
@@ -283,7 +329,7 @@ export default function QuadrantDiagram({
         {renderBox("allergy")}
       </svg>
       {revealedSteps === 0 && (
-        <p className="mt-2 text-center text-xs text-muted">
+        <p className="mt-3 text-center text-xs text-muted">
           Fills in as you complete the assessment
         </p>
       )}

@@ -15,7 +15,7 @@ export default function VideoSection({
     <section className="border-t border-card-border bg-background px-6 py-16">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="mb-6 text-2xl font-bold text-foreground">
-          🎬 Video Walkthrough
+          What are Ofman&apos;s Core Quadrants?
         </h2>
 
         {embedUrl ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer, useEffect, Suspense, useCallback } from "react";
+import { useReducer, useEffect, useState, Suspense, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   AssessmentState,
@@ -55,12 +55,52 @@ function reducer(
   }
 }
 
+const COMPLETED_PATHS_KEY = "ofman_completed_paths";
+
+function loadCompletedPaths(): Set<EntryPath> {
+  try {
+    const raw = localStorage.getItem(COMPLETED_PATHS_KEY);
+    if (raw) return new Set(JSON.parse(raw) as EntryPath[]);
+  } catch {
+    // ignore
+  }
+  return new Set();
+}
+
+function saveCompletedPaths(paths: Set<EntryPath>) {
+  try {
+    localStorage.setItem(COMPLETED_PATHS_KEY, JSON.stringify([...paths]));
+  } catch {
+    // ignore
+  }
+}
+
 function AssessmentContent() {
   const searchParams = useSearchParams();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [completedPaths, setCompletedPaths] = useState<Set<EntryPath>>(
+    new Set(),
+  );
   const quadrant = state.selectedQuadrantId
     ? (getQuadrantById(state.selectedQuadrantId) ?? null)
     : null;
+
+  // Load completed paths from localStorage on mount
+  useEffect(() => {
+    setCompletedPaths(loadCompletedPaths());
+  }, []);
+
+  // Persist completed path when assessment finishes
+  useEffect(() => {
+    if (state.phase === "complete" && state.entryPath) {
+      setCompletedPaths((prev) => {
+        const next = new Set(prev);
+        next.add(state.entryPath!);
+        saveCompletedPaths(next);
+        return next;
+      });
+    }
+  }, [state.phase, state.entryPath]);
 
   // Check for shared URL on mount
   useEffect(() => {
@@ -119,55 +159,53 @@ function AssessmentContent() {
         id="assessment"
         className="border-t border-card-border bg-background px-6 py-16"
       >
-        <div className="mx-auto max-w-5xl">
-          {/* Desktop: two-column layout */}
-          <div className="lg:flex lg:gap-12">
-            {/* Left column: diagram (sticky on desktop) */}
-            <div className="mb-8 lg:mb-0 lg:w-[400px] lg:shrink-0">
-              <div className="lg:sticky lg:top-8">
-                <QuadrantDiagram
+        <div className="mx-auto max-w-2xl">
+          {/* Single-column layout */}
+          <div className="space-y-8">
+            {state.phase === "intro" && (
+              <AssessmentPathSelector
+                onSelectPath={handleSelectPath}
+                completedPaths={completedPaths}
+              />
+            )}
+
+            {state.phase === "picking" && state.entryPath && (
+              <TraitPicker
+                mode={state.entryPath}
+                onSelectTrait={handleSelectTrait}
+              />
+            )}
+
+            {/* Quadrant diagram: only visible during stepping and complete */}
+            {(state.phase === "stepping" || state.phase === "complete") && (
+              <QuadrantDiagram
+                quadrant={quadrant}
+                revealedSteps={state.revealedSteps}
+                entryPath={state.entryPath}
+              />
+            )}
+
+            {state.phase === "stepping" &&
+              quadrant &&
+              state.entryPath && (
+                <StepReveal
                   quadrant={quadrant}
-                  revealedSteps={state.revealedSteps}
                   entryPath={state.entryPath}
-                />
-              </div>
-            </div>
-
-            {/* Right column: assessment flow */}
-            <div className="flex-1">
-              {state.phase === "intro" && (
-                <AssessmentPathSelector onSelectPath={handleSelectPath} />
-              )}
-
-              {state.phase === "picking" && state.entryPath && (
-                <TraitPicker
-                  mode={state.entryPath}
-                  onSelectTrait={handleSelectTrait}
+                  revealedSteps={state.revealedSteps}
+                  onNext={handleNext}
+                  onComplete={handleComplete}
                 />
               )}
 
-              {state.phase === "stepping" &&
-                quadrant &&
-                state.entryPath && (
-                  <StepReveal
-                    quadrant={quadrant}
-                    entryPath={state.entryPath}
-                    revealedSteps={state.revealedSteps}
-                    onNext={handleNext}
-                    onComplete={handleComplete}
-                  />
-                )}
-
-              {state.phase === "complete" &&
-                quadrant &&
-                state.entryPath && (
-                  <ResultsSummary
-                    quadrant={quadrant}
-                    entryPath={state.entryPath}
-                    onReset={handleReset}
-                  />
-                )}
-            </div>
+            {state.phase === "complete" &&
+              quadrant &&
+              state.entryPath && (
+                <ResultsSummary
+                  quadrant={quadrant}
+                  entryPath={state.entryPath}
+                  onReset={handleReset}
+                />
+              )}
           </div>
         </div>
       </section>
