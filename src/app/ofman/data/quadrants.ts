@@ -1315,6 +1315,293 @@ export const quadrants: QuadrantData[] = [
     growthTip:
       "Before sharing a hard truth, ask: 'What's the most caring way to say this?' Honesty and kindness aren't opposites — they're partners.",
   },
+  // ── ADDITIONAL STRENGTHS ─────────────────────────────────
+  {
+    id: "assertive",
+    category: "leadership",
+    coreQuality: {
+      trait: "Assertive",
+      description:
+        "You state your limits clearly and act with firmness, standing up for your needs and boundaries without hesitation.",
+    },
+    pitfall: {
+      trait: "Aggressive",
+      description:
+        "When overdone, assertiveness becomes aggression — bulldozing others' feelings and shutting down dialogue.",
+    },
+    challenge: {
+      trait: "Receptiveness",
+      description:
+        "Your growth area is developing receptiveness — genuinely listening to and absorbing others' perspectives before responding.",
+    },
+    allergy: {
+      trait: "Spineless",
+      description:
+        "People who never stand up for themselves, constantly defer, or let others walk all over them likely trigger deep frustration in you.",
+    },
+    growthTip:
+      "After stating your position, pause and invite the other person's view. 'That's where I stand — what's your take?' shows strength and openness.",
+  },
+  {
+    id: "helpful",
+    category: "interpersonal",
+    coreQuality: {
+      trait: "Helpful",
+      description:
+        "You have a natural inclination to support and assist others, actively looking for ways to make their lives easier.",
+    },
+    pitfall: {
+      trait: "Meddling",
+      description:
+        "When overdone, helpfulness becomes intrusive — jumping in to fix things people didn't ask you to fix, undermining their autonomy.",
+    },
+    challenge: {
+      trait: "Stepping Back",
+      description:
+        "Your growth area is learning when to hold back — trusting others to solve their own problems and offering help only when invited.",
+    },
+    allergy: {
+      trait: "Indifferent",
+      description:
+        "People who show no interest in helping others, who shrug at someone's struggle, likely trigger strong irritation in you.",
+    },
+    growthTip:
+      "Before jumping in, ask: 'Would you like help with this, or would you rather work through it yourself?' Respect their agency.",
+  },
+  {
+    id: "considerate",
+    category: "interpersonal",
+    coreQuality: {
+      trait: "Considerate",
+      description:
+        "You are naturally thoughtful and mindful of others' needs, anticipating how your actions affect those around you.",
+    },
+    pitfall: {
+      trait: "Over-accommodating",
+      description:
+        "When overdone, consideration becomes self-erasure — constantly putting others first until your own needs disappear entirely.",
+    },
+    challenge: {
+      trait: "Self-advocacy",
+      description:
+        "Your growth area is advocating for your own needs — learning that taking care of yourself isn't selfish, it's sustainable.",
+    },
+    allergy: {
+      trait: "Thoughtless",
+      description:
+        "People who barrel through situations without any regard for how they affect others likely trigger deep frustration in you.",
+    },
+    growthTip:
+      "Practice stating one personal need per day without apologizing for it. Consideration for others works best when it includes you.",
+  },
+  {
+    id: "respectful",
+    category: "interpersonal",
+    coreQuality: {
+      trait: "Respectful",
+      description:
+        "You value the contributions and differences of others, treating everyone with dignity regardless of status or role.",
+    },
+    pitfall: {
+      trait: "Deferential",
+      description:
+        "When overdone, respect becomes excessive deference — never challenging ideas, even bad ones, out of politeness.",
+    },
+    challenge: {
+      trait: "Constructive Challenge",
+      description:
+        "Your growth area is learning to respectfully push back — understanding that disagreeing with an idea is not disrespecting the person.",
+    },
+    allergy: {
+      trait: "Disrespectful",
+      description:
+        "People who dismiss others, belittle contributions, or show contempt for those they consider 'beneath them' trigger your deepest frustration.",
+    },
+    growthTip:
+      "Practice prefacing challenges with acknowledgment: 'I appreciate that perspective — here's where I see it differently.' Respect and honesty can coexist.",
+  },
+  {
+    id: "tolerant",
+    category: "interpersonal",
+    coreQuality: {
+      trait: "Tolerant",
+      description:
+        "You are patient and accepting of diverse viewpoints and behaviors, creating space for people to be themselves.",
+    },
+    pitfall: {
+      trait: "Anything-goes",
+      description:
+        "When overdone, tolerance becomes a lack of standards — accepting harmful behavior because confrontation feels uncomfortable.",
+    },
+    challenge: {
+      trait: "Discerning Boundaries",
+      description:
+        "Your growth area is discernment — learning when acceptance is a virtue and when it enables behavior that shouldn't be tolerated.",
+    },
+    allergy: {
+      trait: "Judgmental",
+      description:
+        "People who are quick to condemn, rigid in their views, or dismissive of anyone different from them trigger strong aversion in you.",
+    },
+    growthTip:
+      "Ask yourself: 'Am I being tolerant, or am I avoiding a difficult conversation?' True tolerance has boundaries — it doesn't mean accepting everything.",
+  },
+  {
+    id: "persevering",
+    category: "work",
+    coreQuality: {
+      trait: "Persevering",
+      description:
+        "You maintain effort over long stretches, pushing through setbacks and difficulty with steady determination.",
+    },
+    pitfall: {
+      trait: "Grinding",
+      description:
+        "When overdone, perseverance becomes grinding — refusing to pivot even when the path is clearly no longer working.",
+    },
+    challenge: {
+      trait: "Strategic Quitting",
+      description:
+        "Your growth area is knowing when to stop — recognizing that sometimes the wisest move is to let go and redirect your energy.",
+    },
+    allergy: {
+      trait: "Quitter",
+      description:
+        "People who give up at the first sign of difficulty, who abandon commitments when things get hard, deeply frustrate you.",
+    },
+    growthTip:
+      "Set regular 'is this still worth it?' checkpoints. Perseverance is a strength, but only when the destination still matters.",
+  },
+  {
+    id: "pragmatic",
+    category: "work",
+    coreQuality: {
+      trait: "Pragmatic",
+      description:
+        "You focus on practical results and 'good enough' solutions, cutting through idealism to deliver what actually works.",
+    },
+    pitfall: {
+      trait: "Unimaginative",
+      description:
+        "When overdone, pragmatism becomes a ceiling — dismissing bold ideas too quickly because they don't fit the current playbook.",
+    },
+    challenge: {
+      trait: "Visionary Thinking",
+      description:
+        "Your growth area is making room for ambitious possibilities — sometimes the impractical idea is the one that changes everything.",
+    },
+    allergy: {
+      trait: "Ivory-tower",
+      description:
+        "People who endlessly theorize without shipping, who chase perfection while ignoring real constraints, deeply frustrate you.",
+    },
+    growthTip:
+      "When you catch yourself saying 'that'll never work,' pause and ask 'what would need to be true for this to work?' Give ideas a chance before filtering.",
+  },
+  {
+    id: "prepared",
+    category: "work",
+    coreQuality: {
+      trait: "Prepared",
+      description:
+        "You are consistently well-organized and ready for tasks, thinking ahead so you can handle whatever comes.",
+    },
+    pitfall: {
+      trait: "Over-preparing",
+      description:
+        "When overdone, preparedness becomes procrastination-by-planning — spending so long getting ready that you never actually start.",
+    },
+    challenge: {
+      trait: "Improvisation",
+      description:
+        "Your growth area is learning to act without a full plan — trusting your ability to figure things out on the fly.",
+    },
+    allergy: {
+      trait: "Winging It",
+      description:
+        "People who walk into situations completely unprepared, who rely on charm over substance, deeply frustrate you.",
+    },
+    growthTip:
+      "Try one task this week with minimal preparation. Notice that you can handle more uncertainty than you think.",
+  },
+  {
+    id: "concise",
+    category: "work",
+    coreQuality: {
+      trait: "Concise",
+      description:
+        "You are brief but comprehensive in communication, distilling complex ideas into clear, focused messages.",
+    },
+    pitfall: {
+      trait: "Terse",
+      description:
+        "When overdone, conciseness becomes curtness — stripping away so much context that people feel dismissed or confused.",
+    },
+    challenge: {
+      trait: "Elaboration",
+      description:
+        "Your growth area is learning when more context is needed — sometimes people need the story, not just the headline.",
+    },
+    allergy: {
+      trait: "Long-winded",
+      description:
+        "People who ramble endlessly, who take ten minutes to make a one-minute point, trigger your deepest impatience.",
+    },
+    growthTip:
+      "Match your communication depth to the audience. A quick update deserves brevity; a complex decision deserves more narrative.",
+  },
+  {
+    id: "flexible",
+    category: "personal",
+    coreQuality: {
+      trait: "Flexible",
+      description:
+        "You adapt readily to change and new circumstances, staying effective even when plans shift beneath you.",
+    },
+    pitfall: {
+      trait: "Shapeless",
+      description:
+        "When overdone, flexibility becomes a lack of conviction — bending so much that people can't tell what you actually stand for.",
+    },
+    challenge: {
+      trait: "Firmness",
+      description:
+        "Your growth area is holding your ground when it matters — knowing when to adapt and when to say 'no, this is important to me.'",
+    },
+    allergy: {
+      trait: "Stubborn",
+      description:
+        "People who refuse to adjust, who dig in their heels regardless of new information, deeply frustrate you.",
+    },
+    growthTip:
+      "Identify three things that are non-negotiable for you. Flexibility is a superpower — but it needs an anchor.",
+  },
+  {
+    id: "open-minded",
+    category: "personal",
+    coreQuality: {
+      trait: "Open-minded",
+      description:
+        "You are receptive to new information, experimental ideas, and different perspectives, welcoming what others might dismiss.",
+    },
+    pitfall: {
+      trait: "Uncritical",
+      description:
+        "When overdone, openness becomes gullibility — accepting every idea as equally valid without healthy skepticism.",
+    },
+    challenge: {
+      trait: "Critical Evaluation",
+      description:
+        "Your growth area is developing discernment — learning to filter ideas through evidence and logic while staying open to being surprised.",
+    },
+    allergy: {
+      trait: "Closed-minded",
+      description:
+        "People who refuse to consider new information, who dismiss ideas before hearing them out, trigger deep frustration in you.",
+    },
+    growthTip:
+      "After exploring a new idea, ask yourself: 'What evidence would change my mind about this — in either direction?' Openness includes being open to saying no.",
+  },
 ];
 
 export const quadrantsByCategory: Record<QuadrantCategory, QuadrantData[]> = {

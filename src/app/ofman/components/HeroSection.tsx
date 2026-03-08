@@ -27,7 +27,8 @@ export default function HeroSection() {
           irritation holds a mirror.
         </p>
 
-        <div className="mx-auto max-w-md rounded-2xl border border-card-border bg-card-bg p-6 text-left">
+        {/* Use this tool if... */}
+        <div className="mx-auto max-w-md p-6 text-left">
           <h3 className="mb-3 text-sm font-semibold text-accent">
             🎯 Use this tool if...
           </h3>

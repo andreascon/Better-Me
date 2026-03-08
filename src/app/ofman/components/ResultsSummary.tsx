@@ -121,6 +121,55 @@ export default function ResultsSummary({
         </p>
       </div>
 
+      {/* Interpersonal Insight */}
+      <div className="mt-4 rounded-2xl border border-quadrant-allergy/20 bg-quadrant-allergy-light p-6">
+        <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-quadrant-allergy">
+          <span>🤝</span> Relationship Insight
+        </h3>
+        <p className="text-sm leading-relaxed text-foreground">
+          When someone&apos;s behaviour triggers your allergy (
+          <strong>{quadrant.allergy.trait}</strong>), remember: their excess is
+          often the flip side of a quality you could develop more —{" "}
+          <strong>{quadrant.challenge.trait}</strong>. Instead of reacting, try
+          showing more of your challenge. It disarms the tension and helps you
+          grow.
+        </p>
+      </div>
+
+      {/* Putting It Into Practice */}
+      <div className="mt-4 rounded-2xl border border-card-border bg-card-bg p-6">
+        <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
+          <span>🧭</span> Putting It Into Practice
+        </h3>
+        <div className="space-y-3 text-sm leading-relaxed text-muted">
+          <div>
+            <p className="font-medium text-foreground">Perspective</p>
+            <p>
+              Your allergy reveals your growth edge. When{" "}
+              <strong>{quadrant.allergy.trait}</strong> bothers you, see it as a
+              signal to practise <strong>{quadrant.challenge.trait}</strong>.
+            </p>
+          </div>
+          <div>
+            <p className="font-medium text-foreground">Relationships</p>
+            <p>
+              Share your quadrant with a colleague, partner, or friend. Understanding
+              each other&apos;s quadrants makes conflict easier to navigate — your
+              allergy may be their pitfall, and vice versa.
+            </p>
+          </div>
+          <div>
+            <p className="font-medium text-foreground">Personal Development</p>
+            <p>
+              Set a small goal around your challenge (
+              <strong>{quadrant.challenge.trait}</strong>). The aim is not to lose
+              your core quality, but to add balance — so your strength shines
+              without tipping into its shadow.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Actions */}
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <button
