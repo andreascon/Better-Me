@@ -66,6 +66,15 @@ const apps: AppCardProps[] = [
     href: "/ofman",
   },
   {
+    title: "Personal Values",
+    description:
+      "Discover your core values through what triggers you and what you overdo. Build a values statement grounded in real behaviours, not nice-sounding words.",
+    icon: "\u{1F9ED}",
+    category: "Values",
+    status: "available",
+    href: "/values",
+  },
+  {
     title: "Habit Tracker",
     description:
       "Build lasting habits with daily tracking, streaks, and gentle reminders to keep you on course.",
