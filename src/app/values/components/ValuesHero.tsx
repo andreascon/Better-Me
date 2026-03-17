@@ -33,7 +33,7 @@ export default function ValuesHero({ onStart }: ValuesHeroProps) {
           accept - from others or yourself.
         </p>
 
-        <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed text-muted">
+        <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted">
           But values are hard to spot because they hide in plain sight. Most
           people can&apos;t just pick them from a list of nice-sounding words.
           That&apos;s why we&apos;ll uncover yours by looking at what triggers
