@@ -35,7 +35,6 @@ export function getPitfalls(quadrants: QuadrantData[]): SwipeItem[] {
 const emptyStatements: ValueStatement = {
   positive: ["", ""],
   boundary: "",
-  costReflection: "",
 };
 
 /**

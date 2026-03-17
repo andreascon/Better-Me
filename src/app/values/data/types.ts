@@ -16,7 +16,6 @@ export interface SwipeItem {
 export interface ValueStatement {
   positive: string[]; // 1-2 "I..." statements
   boundary: string; // "I will not..." statement
-  costReflection: string; // what you risk by holding this line
 }
 
 export interface PersonalValue {

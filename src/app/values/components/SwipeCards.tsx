@@ -6,19 +6,14 @@ import { shuffle } from "../data/helpers";
 
 interface SwipeCardsProps {
   items: SwipeItem[];
-  /** Phase-specific heading shown above the card stack */
   heading: string;
-  /** Phase-specific subheading / instructions */
   subheading: string;
   /** Label for the "right-swipe" (select) button */
   selectLabel: string;
   /** Label for the "left-swipe" (skip) button */
   skipLabel: string;
-  /** Min selections required */
   minSelections?: number;
-  /** Max selections allowed (auto-stops here) */
   maxSelections?: number;
-  /** Fires when user finishes (either all cards or enough selected) */
   onComplete: (selectedIds: string[]) => void;
 }
 
@@ -86,7 +81,7 @@ export default function SwipeCards({
     [currentCard, currentIndex, done, maxSelections, selectedIds, shuffled.length]
   );
 
-  // Keyboard support
+  // Keyboard support (arrow keys)
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (done) return;
@@ -97,7 +92,7 @@ export default function SwipeCards({
     return () => window.removeEventListener("keydown", handleKey);
   }, [advanceCard, done]);
 
-  // Touch handlers
+  // Touch/mouse drag handlers
   const handlePointerDown = (e: React.PointerEvent) => {
     if (done) return;
     setIsDragging(true);
@@ -210,15 +205,17 @@ export default function SwipeCards({
   }
 
   return (
-    <div className="mx-auto max-w-md px-6 py-12">
+    <div className="mx-auto max-w-2xl px-6 py-12">
       {/* Header */}
       <div className="mb-8 text-center">
         <h2 className="mb-2 text-2xl font-bold text-foreground">{heading}</h2>
-        <p className="text-sm leading-relaxed text-muted">{subheading}</p>
+        <p className="mx-auto max-w-md text-sm leading-relaxed text-muted">
+          {subheading}
+        </p>
       </div>
 
       {/* Progress */}
-      <div className="mb-6 flex items-center justify-between text-xs text-muted">
+      <div className="mx-auto mb-6 flex max-w-md items-center justify-between text-xs text-muted">
         <span>
           Card {currentIndex + 1} of {shuffled.length}
         </span>
@@ -230,63 +227,91 @@ export default function SwipeCards({
         </span>
       </div>
 
-      {/* Card stack */}
-      <div className="relative mb-8 h-[320px]">
-        {/* Background cards for stack effect */}
-        {shuffled[currentIndex + 2] && (
-          <div className="absolute inset-x-4 top-4 h-[300px] rounded-2xl border border-card-border/50 bg-card-bg/40" />
-        )}
-        {shuffled[currentIndex + 1] && (
-          <div className="absolute inset-x-2 top-2 h-[310px] rounded-2xl border border-card-border/70 bg-card-bg/60" />
-        )}
+      {/* Card area with side buttons */}
+      <div className="flex items-center justify-center gap-3 sm:gap-5">
+        {/* Left (skip) button */}
+        <button
+          onClick={() => advanceCard("left")}
+          className="flex h-auto min-w-[80px] shrink-0 flex-col items-center gap-1.5 rounded-2xl border border-quadrant-pitfall/30 px-3 py-4 text-quadrant-pitfall transition-all hover:border-quadrant-pitfall hover:bg-quadrant-pitfall/10 sm:min-w-[100px] sm:px-4"
+          aria-label={skipLabel}
+        >
+          <span className="text-2xl">&times;</span>
+          <span className="text-xs font-medium leading-tight text-center">
+            {skipLabel}
+          </span>
+        </button>
 
-        {/* Active card */}
-        {currentCard && (
-          <div
-            ref={cardRef}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerUp}
-            className="absolute inset-0 cursor-grab touch-none select-none rounded-2xl border border-card-border bg-card-bg shadow-md active:cursor-grabbing"
-            style={{
-              transform: `translateX(${flyX}px) rotate(${flyRotation}deg)`,
-              opacity,
-              transition:
-                flyDirection || !isDragging
-                  ? "transform 0.3s ease-out, opacity 0.3s ease-out"
-                  : "none",
-              borderColor:
-                hintGreen > 0.3
-                  ? `rgba(107, 143, 94, ${hintGreen})`
-                  : hintRed > 0.3
-                    ? `rgba(194, 105, 74, ${hintRed})`
-                    : undefined,
-            }}
-          >
-            <div className="flex h-full flex-col justify-between p-6">
-              <div>
-                <span className="mb-3 inline-block rounded-full bg-muted/10 px-3 py-1 text-xs text-muted">
-                  {currentCard.category}
-                </span>
-                <h3 className="mb-4 text-2xl font-bold text-foreground">
-                  {currentCard.trait}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted">
-                  {currentCard.description}
-                </p>
-              </div>
-              <div className="flex justify-between text-xs text-muted/60">
-                <span>&larr; {skipLabel}</span>
-                <span>{selectLabel} &rarr;</span>
+        {/* Card stack */}
+        <div className="relative h-[320px] w-full max-w-[340px]">
+          {/* Background cards for stack effect */}
+          {shuffled[currentIndex + 2] && (
+            <div className="absolute inset-x-4 top-4 h-[300px] rounded-2xl border border-card-border/50 bg-card-bg/40" />
+          )}
+          {shuffled[currentIndex + 1] && (
+            <div className="absolute inset-x-2 top-2 h-[310px] rounded-2xl border border-card-border/70 bg-card-bg/60" />
+          )}
+
+          {/* Active card */}
+          {currentCard && (
+            <div
+              ref={cardRef}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
+              className="absolute inset-0 cursor-grab touch-none select-none rounded-2xl border border-card-border bg-card-bg shadow-md active:cursor-grabbing"
+              style={{
+                transform: `translateX(${flyX}px) rotate(${flyRotation}deg)`,
+                opacity,
+                transition:
+                  flyDirection || !isDragging
+                    ? "transform 0.3s ease-out, opacity 0.3s ease-out"
+                    : "none",
+                borderColor:
+                  hintGreen > 0.3
+                    ? `rgba(107, 143, 94, ${hintGreen})`
+                    : hintRed > 0.3
+                      ? `rgba(194, 105, 74, ${hintRed})`
+                      : undefined,
+              }}
+            >
+              <div className="flex h-full flex-col justify-between p-6">
+                <div>
+                  <span className="mb-3 inline-block rounded-full bg-muted/10 px-3 py-1 text-xs text-muted">
+                    {currentCard.category}
+                  </span>
+                  <h3 className="mb-4 text-2xl font-bold text-foreground">
+                    {currentCard.trait}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted">
+                    {currentCard.description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
+
+        {/* Right (select) button */}
+        <button
+          onClick={() => advanceCard("right")}
+          className="flex h-auto min-w-[80px] shrink-0 flex-col items-center gap-1.5 rounded-2xl border border-quadrant-quality/30 px-3 py-4 text-quadrant-quality transition-all hover:border-quadrant-quality hover:bg-quadrant-quality/10 sm:min-w-[100px] sm:px-4"
+          aria-label={selectLabel}
+        >
+          <span className="text-2xl">&#10003;</span>
+          <span className="text-xs font-medium leading-tight text-center">
+            {selectLabel}
+          </span>
+        </button>
       </div>
 
-      {/* Buttons */}
-      <div className="flex items-center justify-center gap-4">
+      {/* Instructions */}
+      <p className="mt-4 text-center text-xs text-muted/60">
+        Swipe the card or use <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&larr;</kbd> <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&rarr;</kbd> arrow keys
+      </p>
+
+      {/* Undo / Done buttons */}
+      <div className="mt-6 flex items-center justify-center gap-4">
         {history.length > 0 && (
           <button
             onClick={handleUndo}
@@ -295,21 +320,7 @@ export default function SwipeCards({
             Undo
           </button>
         )}
-        <button
-          onClick={() => advanceCard("left")}
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-quadrant-pitfall/30 text-xl text-quadrant-pitfall transition-all hover:border-quadrant-pitfall hover:bg-quadrant-pitfall/10"
-          aria-label={skipLabel}
-        >
-          &times;
-        </button>
-        <button
-          onClick={() => advanceCard("right")}
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-quadrant-quality/30 text-xl text-quadrant-quality transition-all hover:border-quadrant-quality hover:bg-quadrant-quality/10"
-          aria-label={selectLabel}
-        >
-          &hearts;
-        </button>
-        {remaining > 3 && selectedIds.length >= minSelections && (
+        {selectedIds.length >= minSelections && (
           <button
             onClick={() => setDone(true)}
             className="rounded-full border border-card-border px-4 py-2.5 text-xs font-medium text-muted transition-colors hover:border-accent hover:text-foreground"

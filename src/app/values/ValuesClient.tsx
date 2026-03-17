@@ -14,7 +14,7 @@ import ValuesHero from "./components/ValuesHero";
 import SwipeCards from "./components/SwipeCards";
 import ValuesSynthesis from "./components/ValuesSynthesis";
 import StatementWriter from "./components/StatementWriter";
-import SandboxGraphic from "./components/SandboxGraphic";
+import ValuesSummary from "./components/ValuesSummary";
 
 const initialState: ValuesState = {
   phase: "intro",
@@ -185,8 +185,8 @@ export default function ValuesClient() {
             items={allergyItems}
             heading="What triggers you?"
             subheading="Swipe through these traits. Which ones genuinely irritate you when you see them in others? Be honest — your allergies reveal your deepest values."
-            selectLabel="This triggers me"
-            skipLabel="Not particularly"
+            selectLabel="Triggers me"
+            skipLabel="I don't mind"
             minSelections={3}
             maxSelections={5}
             onComplete={handleAllergyComplete}
@@ -198,7 +198,7 @@ export default function ValuesClient() {
             items={pitfallItems}
             heading="What do you overdo?"
             subheading="Think about what people who know you well — a partner, close friend, or trusted colleague — would say you overdo. These aren't flaws. They're the cost of something you care deeply about."
-            selectLabel="People would say this"
+            selectLabel="I overdo this"
             skipLabel="Not really"
             minSelections={3}
             maxSelections={5}
@@ -231,7 +231,7 @@ export default function ValuesClient() {
         )}
 
         {state.phase === "complete" && (
-          <SandboxGraphic values={state.values} onReset={handleReset} />
+          <ValuesSummary values={state.values} onReset={handleReset} />
         )}
       </div>
     </main>
