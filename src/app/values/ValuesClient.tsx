@@ -44,12 +44,21 @@ function reducer(state: ValuesState, action: ValuesAction): ValuesState {
         selectedPitfallIds: action.selectedIds,
       };
 
-    case "FINISH_COST_TEST":
+    case "FINISH_COST_TEST": {
+      // The surviving IDs are quadrant IDs the user feels strongly about.
+      // Filter both allergy and pitfall selections to only include these quadrants.
+      const survivingSet = new Set(action.survivingAllergyIds);
       return {
         ...state,
         phase: "synthesis",
-        selectedAllergyIds: action.survivingAllergyIds,
+        selectedAllergyIds: state.selectedAllergyIds.filter((id) =>
+          survivingSet.has(id)
+        ),
+        selectedPitfallIds: state.selectedPitfallIds.filter((id) =>
+          survivingSet.has(id)
+        ),
       };
+    }
 
     case "SET_VALUES":
       return { ...state, values: action.values };
@@ -221,6 +230,7 @@ export default function ValuesClient() {
         {state.phase === "cost-test" && (
           <CostTest
             allergyIds={state.selectedAllergyIds}
+            pitfallIds={state.selectedPitfallIds}
             onFinish={handleFinishCostTest}
           />
         )}

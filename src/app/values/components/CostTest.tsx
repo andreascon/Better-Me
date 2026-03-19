@@ -5,6 +5,7 @@ import { quadrants } from "../../ofman/data/quadrants";
 
 interface CostTestProps {
   allergyIds: string[];
+  pitfallIds: string[];
   onFinish: (survivingAllergyIds: string[]) => void;
 }
 
@@ -13,11 +14,27 @@ interface AllergyDetail {
   allergyTrait: string;
   allergyDescription: string;
   coreQualityTrait: string;
+  /** Whether this allergy was directly selected in the allergy phase */
+  directlySelected: boolean;
+  /** Whether this quadrant was also selected via pitfall */
+  hasPitfall: boolean;
 }
 
-export default function CostTest({ allergyIds, onFinish }: CostTestProps) {
+export default function CostTest({
+  allergyIds,
+  pitfallIds,
+  onFinish,
+}: CostTestProps) {
+  // Gather ALL unique quadrant IDs from both allergy and pitfall selections,
+  // then show each quadrant's allergy for the cost test
   const allergyDetails = useMemo<AllergyDetail[]>(() => {
-    return allergyIds
+    const allergySet = new Set(allergyIds);
+    const pitfallSet = new Set(pitfallIds);
+
+    // Combine all unique quadrant IDs
+    const allQuadrantIds = new Set([...allergyIds, ...pitfallIds]);
+
+    return Array.from(allQuadrantIds)
       .map((id) => {
         const q = quadrants.find((q) => q.id === id);
         if (!q) return null;
@@ -26,10 +43,12 @@ export default function CostTest({ allergyIds, onFinish }: CostTestProps) {
           allergyTrait: q.allergy.trait,
           allergyDescription: q.allergy.description,
           coreQualityTrait: q.coreQuality.trait,
+          directlySelected: allergySet.has(id),
+          hasPitfall: pitfallSet.has(id),
         };
       })
       .filter(Boolean) as AllergyDetail[];
-  }, [allergyIds]);
+  }, [allergyIds, pitfallIds]);
 
   const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
 
