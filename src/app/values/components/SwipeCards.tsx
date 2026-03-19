@@ -1,5 +1,5 @@
 "use client";
-
+// swipe-tutorial-v2
 import { useState, useRef, useCallback, useEffect } from "react";
 import type { SwipeItem } from "../data/types";
 import { shuffle } from "../data/helpers";
@@ -41,9 +41,17 @@ export default function SwipeCards({
     { index: number; wasSelected: boolean }[]
   >([]);
   const [done, setDone] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(true);
 
   const dragStartX = useRef(0);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // Dismiss the swipe tutorial on first interaction or after the animation
+  useEffect(() => {
+    if (!showTutorial) return;
+    const timer = setTimeout(() => setShowTutorial(false), 3600);
+    return () => clearTimeout(timer);
+  }, [showTutorial]);
 
   const currentCard = shuffled[currentIndex] as SwipeItem | undefined;
   const remaining = shuffled.length - currentIndex;
@@ -95,6 +103,7 @@ export default function SwipeCards({
   // Touch/mouse drag handlers
   const handlePointerDown = (e: React.PointerEvent) => {
     if (done) return;
+    if (showTutorial) setShowTutorial(false);
     setIsDragging(true);
     dragStartX.current = e.clientX;
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
@@ -287,6 +296,27 @@ export default function SwipeCards({
                     {currentCard.description}
                   </p>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Mobile swipe tutorial overlay */}
+          {showTutorial && currentIndex === 0 && (
+            <div
+              className="pointer-events-none absolute inset-0 z-10 sm:hidden"
+              aria-hidden="true"
+            >
+              {/* Left label */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 animate-[fadeInLeft_2.4s_0.4s_both] rounded-lg bg-quadrant-pitfall/90 px-2.5 py-1.5 text-xs font-semibold text-white shadow-md">
+                ← {skipLabel}
+              </div>
+              {/* Right label */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-[fadeInRight_2.4s_0.4s_both] rounded-lg bg-quadrant-quality/90 px-2.5 py-1.5 text-xs font-semibold text-white shadow-md">
+                {selectLabel} →
+              </div>
+              {/* Animated finger icon sliding left then right */}
+              <div className="absolute left-1/2 top-2/3 -translate-x-1/2 animate-[swipeHint_2.4s_0.2s_both] text-3xl">
+                👆
               </div>
             </div>
           )}

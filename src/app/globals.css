@@ -45,3 +45,28 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Swipe tutorial animations */
+@keyframes swipeHint {
+  0% { transform: translate(-50%, 0); opacity: 0; }
+  10% { opacity: 0.8; }
+  30% { transform: translate(calc(-50% - 60px), 0); opacity: 0.8; }
+  50% { transform: translate(-50%, 0); opacity: 0.8; }
+  70% { transform: translate(calc(-50% + 60px), 0); opacity: 0.8; }
+  90% { transform: translate(-50%, 0); opacity: 0.8; }
+  100% { transform: translate(-50%, 0); opacity: 0; }
+}
+
+@keyframes fadeInLeft {
+  0% { opacity: 0; transform: translate(10px, -50%); }
+  30% { opacity: 1; transform: translate(0, -50%); }
+  80% { opacity: 1; transform: translate(0, -50%); }
+  100% { opacity: 0; transform: translate(0, -50%); }
+}
+
+@keyframes fadeInRight {
+  0% { opacity: 0; transform: translate(-10px, -50%); }
+  30% { opacity: 1; transform: translate(0, -50%); }
+  80% { opacity: 1; transform: translate(0, -50%); }
+  100% { opacity: 0; transform: translate(0, -50%); }
+}
