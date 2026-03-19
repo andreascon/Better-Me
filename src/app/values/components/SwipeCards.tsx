@@ -205,7 +205,7 @@ export default function SwipeCards({
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-12">
+    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
       {/* Header */}
       <div className="mb-8 text-center">
         <h2 className="mb-2 text-2xl font-bold text-foreground">{heading}</h2>
@@ -227,12 +227,12 @@ export default function SwipeCards({
         </span>
       </div>
 
-      {/* Card area with side buttons */}
-      <div className="flex items-center justify-center gap-3 sm:gap-5">
-        {/* Left (skip) button */}
+      {/* Card area — side buttons on desktop, below on mobile */}
+      <div className="flex items-center justify-center gap-5">
+        {/* Left (skip) button — desktop only */}
         <button
           onClick={() => advanceCard("left")}
-          className="flex h-auto min-w-[80px] shrink-0 flex-col items-center gap-1.5 rounded-2xl border border-quadrant-pitfall/30 px-3 py-4 text-quadrant-pitfall transition-all hover:border-quadrant-pitfall hover:bg-quadrant-pitfall/10 sm:min-w-[100px] sm:px-4"
+          className="hidden sm:flex h-auto min-w-[100px] shrink-0 flex-col items-center gap-1.5 rounded-2xl border border-quadrant-pitfall/30 px-4 py-4 text-quadrant-pitfall transition-all hover:border-quadrant-pitfall hover:bg-quadrant-pitfall/10"
           aria-label={skipLabel}
         >
           <span className="text-2xl">&times;</span>
@@ -242,7 +242,7 @@ export default function SwipeCards({
         </button>
 
         {/* Card stack */}
-        <div className="relative h-[320px] w-full max-w-[340px]">
+        <div className="relative mx-auto h-[320px] w-full sm:max-w-[340px]">
           {/* Background cards for stack effect */}
           {shuffled[currentIndex + 2] && (
             <div className="absolute inset-x-4 top-4 h-[300px] rounded-2xl border border-card-border/50 bg-card-bg/40" />
@@ -292,10 +292,10 @@ export default function SwipeCards({
           )}
         </div>
 
-        {/* Right (select) button */}
+        {/* Right (select) button — desktop only */}
         <button
           onClick={() => advanceCard("right")}
-          className="flex h-auto min-w-[80px] shrink-0 flex-col items-center gap-1.5 rounded-2xl border border-quadrant-quality/30 px-3 py-4 text-quadrant-quality transition-all hover:border-quadrant-quality hover:bg-quadrant-quality/10 sm:min-w-[100px] sm:px-4"
+          className="hidden sm:flex h-auto min-w-[100px] shrink-0 flex-col items-center gap-1.5 rounded-2xl border border-quadrant-quality/30 px-4 py-4 text-quadrant-quality transition-all hover:border-quadrant-quality hover:bg-quadrant-quality/10"
           aria-label={selectLabel}
         >
           <span className="text-2xl">&#10003;</span>
@@ -305,9 +305,30 @@ export default function SwipeCards({
         </button>
       </div>
 
+      {/* Mobile action buttons — below the card */}
+      <div className="mt-4 flex items-center justify-center gap-4 sm:hidden">
+        <button
+          onClick={() => advanceCard("left")}
+          className="flex min-w-[120px] items-center justify-center gap-2 rounded-2xl border border-quadrant-pitfall/30 px-5 py-3 text-quadrant-pitfall transition-all hover:border-quadrant-pitfall hover:bg-quadrant-pitfall/10"
+          aria-label={skipLabel}
+        >
+          <span className="text-lg">&times;</span>
+          <span className="text-sm font-medium">{skipLabel}</span>
+        </button>
+        <button
+          onClick={() => advanceCard("right")}
+          className="flex min-w-[120px] items-center justify-center gap-2 rounded-2xl border border-quadrant-quality/30 px-5 py-3 text-quadrant-quality transition-all hover:border-quadrant-quality hover:bg-quadrant-quality/10"
+          aria-label={selectLabel}
+        >
+          <span className="text-lg">&#10003;</span>
+          <span className="text-sm font-medium">{selectLabel}</span>
+        </button>
+      </div>
+
       {/* Instructions */}
-      <p className="mt-4 text-center text-xs text-muted/60">
-        Swipe the card or use <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&larr;</kbd> <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&rarr;</kbd> arrow keys
+      <p className="mt-3 text-center text-xs text-muted/60">
+        <span className="sm:hidden">Swipe the card or tap the buttons</span>
+        <span className="hidden sm:inline">Swipe the card or use <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&larr;</kbd> <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&rarr;</kbd> arrow keys</span>
       </p>
 
       {/* Undo / Done buttons */}
