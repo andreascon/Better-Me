@@ -12,6 +12,7 @@ import type {
 
 import ValuesHero from "./components/ValuesHero";
 import SwipeCards from "./components/SwipeCards";
+import CostTest from "./components/CostTest";
 import ValuesSynthesis from "./components/ValuesSynthesis";
 import StatementWriter from "./components/StatementWriter";
 import ValuesSummary from "./components/ValuesSummary";
@@ -39,8 +40,15 @@ function reducer(state: ValuesState, action: ValuesAction): ValuesState {
     case "FINISH_PITFALLS":
       return {
         ...state,
-        phase: "synthesis",
+        phase: "cost-test",
         selectedPitfallIds: action.selectedIds,
+      };
+
+    case "FINISH_COST_TEST":
+      return {
+        ...state,
+        phase: "synthesis",
+        selectedAllergyIds: action.survivingAllergyIds,
       };
 
     case "SET_VALUES":
@@ -131,16 +139,20 @@ export default function ValuesClient() {
     [scrollToExercise]
   );
 
+  const handleFinishCostTest = useCallback(
+    (survivingAllergyIds: string[]) => {
+      dispatch({ type: "FINISH_COST_TEST", survivingAllergyIds });
+      scrollToExercise();
+    },
+    [scrollToExercise]
+  );
+
   const handleSetValues = useCallback((values: PersonalValue[]) => {
     dispatch({ type: "SET_VALUES", values });
   }, []);
 
   const handleUpdateName = useCallback((index: number, name: string) => {
     dispatch({ type: "UPDATE_VALUE_NAME", index, name });
-  }, []);
-
-  const handleRemoveValue = useCallback((index: number) => {
-    dispatch({ type: "REMOVE_VALUE", index });
   }, []);
 
   const handleFinishSynthesis = useCallback(() => {
@@ -177,7 +189,7 @@ export default function ValuesClient() {
 
   return (
     <main className="min-h-screen bg-background font-sans">
-      <ValuesHero onStart={handleStart} />
+      <ValuesHero onStart={handleStart} disabled={state.phase !== "intro"} />
 
       <div id="values-exercise">
         {state.phase === "picking-allergies" && (
@@ -188,7 +200,7 @@ export default function ValuesClient() {
             selectLabel="Triggers me"
             skipLabel="I don't mind"
             minSelections={3}
-            maxSelections={5}
+            maxSelections={10}
             onComplete={handleAllergyComplete}
           />
         )}
@@ -201,8 +213,15 @@ export default function ValuesClient() {
             selectLabel="I overdo this"
             skipLabel="Not really"
             minSelections={3}
-            maxSelections={5}
+            maxSelections={10}
             onComplete={handlePitfallComplete}
+          />
+        )}
+
+        {state.phase === "cost-test" && (
+          <CostTest
+            allergyIds={state.selectedAllergyIds}
+            onFinish={handleFinishCostTest}
           />
         )}
 
@@ -213,7 +232,6 @@ export default function ValuesClient() {
             values={state.values}
             onSetValues={handleSetValues}
             onUpdateName={handleUpdateName}
-            onRemoveValue={handleRemoveValue}
             onFinish={handleFinishSynthesis}
           />
         )}

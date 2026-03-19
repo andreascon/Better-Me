@@ -4,9 +4,10 @@ import Link from "next/link";
 
 interface ValuesHeroProps {
   onStart: () => void;
+  disabled?: boolean;
 }
 
-export default function ValuesHero({ onStart }: ValuesHeroProps) {
+export default function ValuesHero({ onStart, disabled }: ValuesHeroProps) {
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-3xl px-6 py-6">
@@ -43,7 +44,8 @@ export default function ValuesHero({ onStart }: ValuesHeroProps) {
 
         <button
           onClick={onStart}
-          className="mt-10 inline-flex items-center gap-2 rounded-full border border-card-border bg-card-bg px-6 py-3 text-sm font-medium text-foreground transition-all hover:border-accent hover:shadow-md"
+          disabled={disabled}
+          className="mt-10 inline-flex items-center gap-2 rounded-full border border-card-border bg-card-bg px-6 py-3 text-sm font-medium text-foreground transition-all hover:border-accent hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-card-border disabled:hover:shadow-none"
         >
           Get Started &darr;
         </button>

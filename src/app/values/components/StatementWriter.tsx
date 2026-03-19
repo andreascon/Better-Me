@@ -137,8 +137,8 @@ export default function StatementWriter({
           Positive statements
         </h3>
         <p className="mb-4 text-xs text-muted">
-          What does your future self do? Think of specific behaviours that
-          reflect this value.
+          What commitment would you make to your future self to honour this
+          value?
         </p>
         {s.positive.map((text, i) => (
           <div key={i} className="mb-3 flex gap-2">

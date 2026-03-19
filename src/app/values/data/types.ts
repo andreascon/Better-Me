@@ -2,6 +2,7 @@ export type ValuesPhase =
   | "intro"
   | "picking-allergies"
   | "picking-pitfalls"
+  | "cost-test"
   | "synthesis"
   | "writing"
   | "complete";
@@ -38,6 +39,7 @@ export type ValuesAction =
   | { type: "START" }
   | { type: "FINISH_ALLERGIES"; selectedIds: string[] }
   | { type: "FINISH_PITFALLS"; selectedIds: string[] }
+  | { type: "FINISH_COST_TEST"; survivingAllergyIds: string[] }
   | { type: "SET_VALUES"; values: PersonalValue[] }
   | { type: "UPDATE_VALUE_NAME"; index: number; name: string }
   | { type: "REMOVE_VALUE"; index: number }

@@ -11,7 +11,6 @@ interface ValuesSynthesisProps {
   values: PersonalValue[];
   onSetValues: (values: PersonalValue[]) => void;
   onUpdateName: (index: number, name: string) => void;
-  onRemoveValue: (index: number) => void;
   onFinish: () => void;
 }
 
@@ -21,7 +20,6 @@ export default function ValuesSynthesis({
   values,
   onSetValues,
   onUpdateName,
-  onRemoveValue,
   onFinish,
 }: ValuesSynthesisProps) {
   // Synthesize on first render
@@ -74,9 +72,8 @@ export default function ValuesSynthesis({
           Your Emerging Values
         </h2>
         <p className="text-sm leading-relaxed text-muted">
-          Based on your selections, here are the values that are taking shape.
-          You can rename them to make them your own, or remove any that
-          don&apos;t resonate.
+          Based on your selections, here are the values that emerged. You can
+          rename them to make them your own.
         </p>
       </div>
 
@@ -86,28 +83,17 @@ export default function ValuesSynthesis({
             key={i}
             className="rounded-2xl border border-card-border bg-card-bg p-6"
           >
-            <div className="mb-4 flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <label className="mb-1 block text-xs font-medium text-muted">
-                  Value name
-                </label>
-                <input
-                  type="text"
-                  value={v.name}
-                  onChange={(e) => onUpdateName(i, e.target.value)}
-                  className="w-full rounded-lg border border-card-border bg-background px-3 py-2 text-lg font-semibold text-foreground outline-none transition-colors focus:border-accent"
-                  placeholder="Name this value..."
-                />
-              </div>
-              {values.length > 1 && (
-                <button
-                  onClick={() => onRemoveValue(i)}
-                  className="mt-6 text-xs text-muted transition-colors hover:text-quadrant-pitfall"
-                  title="Remove this value"
-                >
-                  Remove
-                </button>
-              )}
+            <div className="mb-4">
+              <label className="mb-1 block text-xs font-medium text-muted">
+                Value name
+              </label>
+              <input
+                type="text"
+                value={v.name}
+                onChange={(e) => onUpdateName(i, e.target.value)}
+                className="w-full rounded-lg border border-card-border bg-background px-3 py-2 text-lg font-semibold text-foreground outline-none transition-colors focus:border-accent"
+                placeholder="Name this value..."
+              />
             </div>
 
             <div className="space-y-2">
