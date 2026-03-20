@@ -6,6 +6,7 @@ import { getAllergies, getPitfalls } from "./data/helpers";
 import type {
   ValuesState,
   ValuesAction,
+  ValuesPhase,
   PersonalValue,
   ValueStatement,
 } from "./data/types";
@@ -16,6 +17,74 @@ import CostTest from "./components/CostTest";
 import ValuesSynthesis from "./components/ValuesSynthesis";
 import StatementWriter from "./components/StatementWriter";
 import ValuesSummary from "./components/ValuesSummary";
+
+/* ── Step indicator ────────────────────────────────────── */
+
+const steps: { label: string; phases: ValuesPhase[] }[] = [
+  { label: "Triggers", phases: ["picking-allergies"] },
+  { label: "Overdoing", phases: ["picking-pitfalls"] },
+  { label: "Cost test", phases: ["cost-test"] },
+  { label: "Your values", phases: ["synthesis"] },
+  { label: "Statements", phases: ["writing"] },
+  { label: "Summary", phases: ["complete"] },
+];
+
+function StepIndicator({ phase }: { phase: ValuesPhase }) {
+  if (phase === "intro") return null;
+
+  const activeIdx = steps.findIndex((s) => s.phases.includes(phase));
+
+  return (
+    <div className="mx-auto max-w-2xl px-6 pt-8 pb-2">
+      <div className="flex items-center justify-between">
+        {steps.map((step, i) => {
+          const isActive = i === activeIdx;
+          const isDone = i < activeIdx;
+          return (
+            <div key={step.label} className="flex flex-1 items-center">
+              {/* Dot + label */}
+              <div className="flex flex-col items-center gap-1">
+                <div
+                  className={`flex h-7 w-7 items-center justify-center rounded-full text-sm font-semibold transition-colors ${
+                    isActive
+                      ? "bg-accent text-white"
+                      : isDone
+                        ? "bg-quadrant-quality text-white"
+                        : "bg-card-border/40 text-muted"
+                  }`}
+                >
+                  {isDone ? "\u2713" : i + 1}
+                </div>
+                <span
+                  className={`text-xs font-medium whitespace-nowrap ${
+                    isActive
+                      ? "text-accent"
+                      : isDone
+                        ? "text-quadrant-quality"
+                        : "text-muted/60"
+                  }`}
+                >
+                  <span className="hidden sm:inline">{step.label}</span>
+                  <span className="sm:hidden">{i + 1}</span>
+                </span>
+              </div>
+              {/* Connector line */}
+              {i < steps.length - 1 && (
+                <div
+                  className={`mx-1 h-0.5 flex-1 transition-colors ${
+                    i < activeIdx ? "bg-quadrant-quality" : "bg-card-border/40"
+                  }`}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ── Reducer ───────────────────────────────────────────── */
 
 const initialState: ValuesState = {
   phase: "intro",
@@ -113,6 +182,8 @@ function reducer(state: ValuesState, action: ValuesAction): ValuesState {
   }
 }
 
+/* ── Main component ────────────────────────────────────── */
+
 export default function ValuesClient() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -201,6 +272,8 @@ export default function ValuesClient() {
       <ValuesHero onStart={handleStart} disabled={state.phase !== "intro"} />
 
       <div id="values-exercise">
+        <StepIndicator phase={state.phase} />
+
         {state.phase === "picking-allergies" && (
           <SwipeCards
             items={allergyItems}
@@ -208,8 +281,7 @@ export default function ValuesClient() {
             subheading="Swipe through these traits. Which ones genuinely irritate you when you see them in others? Be honest — your allergies reveal your deepest values."
             selectLabel="Triggers me"
             skipLabel="I don't mind"
-            minSelections={3}
-            maxSelections={10}
+            minSelections={5}
             onComplete={handleAllergyComplete}
           />
         )}
@@ -221,8 +293,7 @@ export default function ValuesClient() {
             subheading="Think about what people who know you well — a partner, close friend, or trusted colleague — would say you overdo. These aren't flaws. They're the cost of something you care deeply about."
             selectLabel="I overdo this"
             skipLabel="Not really"
-            minSelections={3}
-            maxSelections={10}
+            minSelections={5}
             onComplete={handlePitfallComplete}
           />
         )}

@@ -74,10 +74,10 @@ export default function CostTest({
         <h2 className="mb-2 text-2xl font-bold text-foreground">
           The cost test
         </h2>
-        <p className="mx-auto max-w-md text-sm leading-relaxed text-muted">
-          Values aren&apos;t really values unless they cost you something. Which
-          of these behaviours would you refuse to tolerate &mdash; even if it
-          meant losing a friend?
+        <p className="mx-auto max-w-md text-lg leading-relaxed text-muted">
+          Values aren&apos;t really <em>core</em> values unless they cost you
+          something. Which of these behaviours would you refuse to tolerate
+          &mdash; even if it meant losing a friend?
         </p>
       </div>
 
@@ -97,16 +97,16 @@ export default function CostTest({
                 type="checkbox"
                 checked={isChecked}
                 onChange={() => toggleId(item.id)}
-                className="mt-0.5 h-5 w-5 shrink-0 accent-quadrant-quality"
+                className="mt-1 h-5 w-5 shrink-0 accent-quadrant-quality"
               />
               <div className="min-w-0">
-                <p className="font-semibold text-foreground">
+                <p className="text-lg font-semibold text-foreground">
                   {item.allergyTrait}
                 </p>
-                <p className="mt-1 text-sm leading-relaxed text-muted">
+                <p className="mt-1 text-lg leading-relaxed text-muted">
                   {item.allergyDescription}
                 </p>
-                <p className="mt-2 text-xs text-muted/60">
+                <p className="mt-2 text-base text-muted/60">
                   Linked to your value:{" "}
                   <span className="font-medium text-quadrant-quality">
                     {item.coreQualityTrait}
@@ -122,13 +122,13 @@ export default function CostTest({
         <button
           onClick={handleContinue}
           disabled={checkedIds.size === 0}
-          className="rounded-full border border-accent bg-accent/10 px-6 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/20 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-accent/10"
+          className="rounded-full border border-accent bg-accent/10 px-6 py-2.5 text-lg font-medium text-accent transition-colors hover:bg-accent/20 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-accent/10"
         >
           Continue with {checkedIds.size} value
           {checkedIds.size !== 1 && "s"} &rarr;
         </button>
         {checkedIds.size === 0 && (
-          <p className="mt-3 text-xs text-muted/60">
+          <p className="mt-3 text-base text-muted/60">
             Select at least one to continue
           </p>
         )}

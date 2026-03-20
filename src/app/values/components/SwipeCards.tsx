@@ -13,7 +13,6 @@ interface SwipeCardsProps {
   /** Label for the "left-swipe" (skip) button */
   skipLabel: string;
   minSelections?: number;
-  maxSelections?: number;
   onComplete: (selectedIds: string[]) => void;
 }
 
@@ -25,11 +24,10 @@ export default function SwipeCards({
   subheading,
   selectLabel,
   skipLabel,
-  minSelections = 3,
-  maxSelections = 5,
+  minSelections = 5,
   onComplete,
 }: SwipeCardsProps) {
-  const [shuffled] = useState(() => shuffle(items));
+  const [shuffled, setShuffled] = useState(() => shuffle(items));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [dragX, setDragX] = useState(0);
@@ -54,7 +52,6 @@ export default function SwipeCards({
   }, [showTutorial]);
 
   const currentCard = shuffled[currentIndex] as SwipeItem | undefined;
-  const remaining = shuffled.length - currentIndex;
 
   const advanceCard = useCallback(
     (direction: "left" | "right") => {
@@ -73,10 +70,7 @@ export default function SwipeCards({
 
         const nextIndex = currentIndex + 1;
 
-        if (
-          nextSelected.length >= maxSelections ||
-          nextIndex >= shuffled.length
-        ) {
+        if (nextIndex >= shuffled.length) {
           setDone(true);
         } else {
           setCurrentIndex(nextIndex);
@@ -86,7 +80,7 @@ export default function SwipeCards({
         setDragX(0);
       }, 300);
     },
-    [currentCard, currentIndex, done, maxSelections, selectedIds, shuffled.length]
+    [currentCard, currentIndex, done, selectedIds, shuffled.length]
   );
 
   // Keyboard support (arrow keys)
@@ -136,6 +130,15 @@ export default function SwipeCards({
     setDone(false);
   };
 
+  const handleRetry = () => {
+    setShuffled(shuffle(items));
+    setCurrentIndex(0);
+    setSelectedIds([]);
+    setHistory([]);
+    setDone(false);
+    setShowTutorial(true);
+  };
+
   const handleFinish = () => {
     onComplete(selectedIds);
   };
@@ -159,12 +162,12 @@ export default function SwipeCards({
       <div className="mx-auto max-w-md px-6 py-12 text-center">
         <h2 className="mb-2 text-2xl font-bold text-foreground">{heading}</h2>
         {selectedIds.length === 0 ? (
-          <p className="mb-6 text-muted">
+          <p className="mb-6 text-lg text-muted">
             You didn&apos;t select any. Try going through the cards again.
           </p>
         ) : (
           <>
-            <p className="mb-6 text-muted">
+            <p className="mb-6 text-lg text-muted">
               You selected {selectedIds.length} item
               {selectedIds.length !== 1 && "s"}.
               {tooFew &&
@@ -179,10 +182,10 @@ export default function SwipeCards({
                     key={id}
                     className="rounded-xl border border-card-border bg-card-bg px-4 py-3"
                   >
-                    <span className="font-medium text-foreground">
+                    <span className="text-lg font-medium text-foreground">
                       {item.trait}
                     </span>
-                    <span className="ml-2 text-xs text-muted">
+                    <span className="ml-2 text-base text-muted">
                       {item.category}
                     </span>
                   </div>
@@ -191,19 +194,25 @@ export default function SwipeCards({
             </div>
           </>
         )}
-        <div className="flex justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           {history.length > 0 && (
             <button
               onClick={handleUndo}
-              className="rounded-full border border-card-border px-5 py-2.5 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
+              className="rounded-full border border-card-border px-5 py-2.5 text-base font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
             >
-              &larr; Undo
+              &larr; Undo last
             </button>
           )}
+          <button
+            onClick={handleRetry}
+            className="rounded-full border border-card-border px-5 py-2.5 text-base font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
+          >
+            Start over
+          </button>
           {!tooFew && selectedIds.length > 0 && (
             <button
               onClick={handleFinish}
-              className="rounded-full border border-accent bg-accent/10 px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
+              className="rounded-full border border-accent bg-accent/10 px-5 py-2.5 text-base font-medium text-accent transition-colors hover:bg-accent/20"
             >
               Continue with {selectedIds.length} &rarr;
             </button>
@@ -218,22 +227,17 @@ export default function SwipeCards({
       {/* Header */}
       <div className="mb-8 text-center">
         <h2 className="mb-2 text-2xl font-bold text-foreground">{heading}</h2>
-        <p className="mx-auto max-w-md text-sm leading-relaxed text-muted">
+        <p className="mx-auto max-w-md text-lg leading-relaxed text-muted">
           {subheading}
         </p>
       </div>
 
       {/* Progress */}
-      <div className="mx-auto mb-6 flex max-w-md items-center justify-between text-xs text-muted">
+      <div className="mx-auto mb-6 flex max-w-md items-center justify-between text-base text-muted">
         <span>
           Card {currentIndex + 1} of {shuffled.length}
         </span>
-        <span>
-          {selectedIds.length} selected
-          {selectedIds.length >= maxSelections - 1 &&
-            selectedIds.length < maxSelections &&
-            " (1 more to go)"}
-        </span>
+        <span>{selectedIds.length} selected</span>
       </div>
 
       {/* Card area — side buttons on desktop, below on mobile */}
@@ -245,7 +249,7 @@ export default function SwipeCards({
           aria-label={skipLabel}
         >
           <span className="text-2xl">&times;</span>
-          <span className="text-xs font-medium leading-tight text-center">
+          <span className="text-base font-medium leading-tight text-center">
             {skipLabel}
           </span>
         </button>
@@ -286,13 +290,13 @@ export default function SwipeCards({
             >
               <div className="flex h-full flex-col justify-between p-6">
                 <div>
-                  <span className="mb-3 inline-block rounded-full bg-muted/10 px-3 py-1 text-xs text-muted">
+                  <span className="mb-3 inline-block rounded-full bg-muted/10 px-3 py-1 text-sm text-muted">
                     {currentCard.category}
                   </span>
                   <h3 className="mb-4 text-2xl font-bold text-foreground">
                     {currentCard.trait}
                   </h3>
-                  <p className="text-sm leading-relaxed text-muted">
+                  <p className="text-lg leading-relaxed text-muted">
                     {currentCard.description}
                   </p>
                 </div>
@@ -307,16 +311,16 @@ export default function SwipeCards({
               aria-hidden="true"
             >
               {/* Left label */}
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 animate-[fadeInLeft_2.4s_0.4s_both] rounded-lg bg-quadrant-pitfall/90 px-2.5 py-1.5 text-xs font-semibold text-white shadow-md">
-                ← {skipLabel}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 animate-[fadeInLeft_2.4s_0.4s_both] rounded-lg bg-quadrant-pitfall/90 px-2.5 py-1.5 text-sm font-semibold text-white shadow-md">
+                &larr; {skipLabel}
               </div>
               {/* Right label */}
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-[fadeInRight_2.4s_0.4s_both] rounded-lg bg-quadrant-quality/90 px-2.5 py-1.5 text-xs font-semibold text-white shadow-md">
-                {selectLabel} →
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 animate-[fadeInRight_2.4s_0.4s_both] rounded-lg bg-quadrant-quality/90 px-2.5 py-1.5 text-sm font-semibold text-white shadow-md">
+                {selectLabel} &rarr;
               </div>
               {/* Animated finger icon sliding left then right */}
               <div className="absolute left-1/2 top-2/3 -translate-x-1/2 animate-[swipeHint_2.4s_0.2s_both] text-3xl">
-                👆
+                &#128070;
               </div>
             </div>
           )}
@@ -329,7 +333,7 @@ export default function SwipeCards({
           aria-label={selectLabel}
         >
           <span className="text-2xl">&#10003;</span>
-          <span className="text-xs font-medium leading-tight text-center">
+          <span className="text-base font-medium leading-tight text-center">
             {selectLabel}
           </span>
         </button>
@@ -343,7 +347,7 @@ export default function SwipeCards({
           aria-label={skipLabel}
         >
           <span className="text-lg">&times;</span>
-          <span className="text-sm font-medium">{skipLabel}</span>
+          <span className="text-base font-medium">{skipLabel}</span>
         </button>
         <button
           onClick={() => advanceCard("right")}
@@ -351,14 +355,14 @@ export default function SwipeCards({
           aria-label={selectLabel}
         >
           <span className="text-lg">&#10003;</span>
-          <span className="text-sm font-medium">{selectLabel}</span>
+          <span className="text-base font-medium">{selectLabel}</span>
         </button>
       </div>
 
       {/* Instructions */}
-      <p className="mt-3 text-center text-xs text-muted/60">
+      <p className="mt-3 text-center text-base text-muted/60">
         <span className="sm:hidden">Swipe the card or tap the buttons</span>
-        <span className="hidden sm:inline">Swipe the card or use <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&larr;</kbd> <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-[10px]">&rarr;</kbd> arrow keys</span>
+        <span className="hidden sm:inline">Swipe the card or use <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-sm">&larr;</kbd> <kbd className="rounded border border-card-border bg-card-bg px-1.5 py-0.5 font-mono text-sm">&rarr;</kbd> arrow keys</span>
       </p>
 
       {/* Undo / Done buttons */}
@@ -366,7 +370,7 @@ export default function SwipeCards({
         {history.length > 0 && (
           <button
             onClick={handleUndo}
-            className="rounded-full border border-card-border px-4 py-2.5 text-xs font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
+            className="rounded-full border border-card-border px-4 py-2.5 text-base font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
           >
             Undo
           </button>
@@ -374,9 +378,9 @@ export default function SwipeCards({
         {selectedIds.length >= minSelections && (
           <button
             onClick={() => setDone(true)}
-            className="rounded-full border border-card-border px-4 py-2.5 text-xs font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
+            className="rounded-full border border-accent bg-accent/10 px-5 py-2.5 text-base font-medium text-accent transition-colors hover:bg-accent/20"
           >
-            Done
+            Done &mdash; continue with {selectedIds.length} &rarr;
           </button>
         )}
       </div>

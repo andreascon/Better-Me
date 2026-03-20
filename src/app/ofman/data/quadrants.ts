@@ -15,7 +15,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Decisive",
       description:
-        "You make decisions quickly and confidently, cutting through ambiguity to move things forward.",
+        "You make decisions quickly and move to action, cutting through ambiguity and getting things started while others are still deliberating.",
     },
     pitfall: {
       trait: "Rash",
@@ -41,7 +41,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Visionary",
       description:
-        "You see possibilities where others see limitations, naturally painting a compelling picture of what could be.",
+        "You see possibilities where others see limitations, maintaining hope and naturally painting a compelling picture of what could be.",
     },
     pitfall: {
       trait: "Unrealistic",
@@ -119,7 +119,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Driven",
       description:
-        "You have an inner engine that propels you forward relentlessly, pursuing goals with intensity and determination.",
+        "You have an inner engine that propels you forward, setting your sights high and pursuing meaningful goals with intensity and determination.",
     },
     pitfall: {
       trait: "Obsessive",
@@ -218,38 +218,12 @@ export const quadrants: QuadrantData[] = [
       "Practice saying 'Tell me more about your perspective' before making your case. Influence grows when people feel heard first.",
   },
   {
-    id: "initiating",
-    category: "leadership",
-    coreQuality: {
-      trait: "Initiating",
-      description:
-        "You naturally start things — seeing an opportunity and immediately moving to action while others are still deliberating.",
-    },
-    pitfall: {
-      trait: "Impetuous",
-      description:
-        "When overdone, initiative becomes haste — launching into action before the situation is fully understood.",
-    },
-    challenge: {
-      trait: "Deliberateness",
-      description:
-        "Your growth area is thoughtful deliberation — giving ideas time to develop before acting on them.",
-    },
-    allergy: {
-      trait: "Stagnant",
-      description:
-        "People who endlessly discuss without ever starting anything likely make you deeply impatient.",
-    },
-    growthTip:
-      "Before starting your next project, write down three things you need to understand first. Action informed by reflection is unstoppable.",
-  },
-  {
     id: "resilient",
     category: "leadership",
     coreQuality: {
       trait: "Resilient",
       description:
-        "You recover quickly from setbacks and disappointments, regaining your composure and confidence when others would stay knocked down.",
+        "You recover quickly from setbacks and sustain effort over the long haul, maintaining your composure and determination when others would give up.",
     },
     pitfall: {
       trait: "Stubborn",
@@ -433,7 +407,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Caring",
       description:
-        "You naturally nurture and look after others, creating warmth and safety in your relationships.",
+        "You naturally nurture and look after others, actively looking for ways to create warmth, safety, and support in your relationships.",
     },
     pitfall: {
       trait: "Smothering",
@@ -485,7 +459,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Diplomatic",
       description:
-        "You navigate politically sensitive situations with grace, balancing competing interests and finding solutions that protect relationships.",
+        "You navigate sensitive situations with grace, choosing your words carefully to balance competing interests while preserving relationships and others' dignity.",
     },
     pitfall: {
       trait: "Conflict-avoidant",
@@ -558,38 +532,12 @@ export const quadrants: QuadrantData[] = [
       "Forgive the person, but address the behavior. You can release resentment and still say 'This isn't acceptable.'",
   },
   {
-    id: "harmonious",
-    category: "interpersonal",
-    coreQuality: {
-      trait: "Harmonious",
-      description:
-        "You create peaceful environments and naturally smooth over tensions, helping groups find common ground.",
-    },
-    pitfall: {
-      trait: "People-pleasing",
-      description:
-        "When overdone, harmony-seeking becomes people-pleasing — suppressing your own needs and opinions to keep everyone happy.",
-    },
-    challenge: {
-      trait: "Constructive Confrontation",
-      description:
-        "Your growth area is engaging in healthy conflict — understanding that productive disagreement often leads to better outcomes.",
-    },
-    allergy: {
-      trait: "Combative",
-      description:
-        "People who create unnecessary conflict, raise their voice, or use intimidation likely make you deeply uncomfortable.",
-    },
-    growthTip:
-      "Remind yourself: disagreement is not the same as disharmony. The best teams argue well, not less.",
-  },
-  {
     id: "cooperative",
     category: "interpersonal",
     coreQuality: {
       trait: "Cooperative",
       description:
-        "You work well with others, naturally finding ways to align your efforts with the group's goals.",
+        "You work well with others, naturally creating harmony and finding ways to align your efforts with the group's goals.",
     },
     pitfall: {
       trait: "Compliant",
@@ -661,32 +609,6 @@ export const quadrants: QuadrantData[] = [
     growthTip:
       "Set internal deadlines for your patience. If nothing has changed by then, it's time to speak up — calmly but firmly.",
   },
-  {
-    id: "tactful",
-    category: "interpersonal",
-    coreQuality: {
-      trait: "Tactful",
-      description:
-        "You choose your words and timing carefully, delivering difficult messages in a way that preserves others' dignity.",
-    },
-    pitfall: {
-      trait: "Evasive",
-      description:
-        "When overdone, tact becomes evasiveness — being so careful with words that the actual message never lands.",
-    },
-    challenge: {
-      trait: "Candor",
-      description:
-        "Your growth area is straightforward honesty — trusting that people can handle the truth when delivered with respect.",
-    },
-    allergy: {
-      trait: "Insensitive",
-      description:
-        "People who say whatever comes to mind with zero regard for the impact of their words likely appall you.",
-    },
-    growthTip:
-      "Ask yourself: 'Am I being tactful or just avoiding?' If the message isn't landing, clarity is kindness.",
-  },
 
   // ── WORK & ACHIEVEMENT ────────────────────────────────
   {
@@ -695,7 +617,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Detail-oriented",
       description:
-        "You spot the specifics others miss — inconsistencies, typos, subtle errors — bringing microscopic precision to everything you touch.",
+        "You hold work to a high standard and spot the specifics others miss — inconsistencies, subtle errors — bringing precision and quality consciousness to everything you touch.",
     },
     pitfall: {
       trait: "Perfectionist",
@@ -742,38 +664,12 @@ export const quadrants: QuadrantData[] = [
       "Leave one block of unstructured time in your week. Some of the best ideas emerge when you stop planning for them.",
   },
   {
-    id: "ambitious",
-    category: "work",
-    coreQuality: {
-      trait: "Ambitious",
-      description:
-        "You set your sights high and pursue meaningful goals with energy and determination.",
-    },
-    pitfall: {
-      trait: "Relentless",
-      description:
-        "When overdone, ambition becomes relentlessness — chasing the next goal so intensely that you neglect rest, relationships, and perspective.",
-    },
-    challenge: {
-      trait: "Appreciation",
-      description:
-        "Your growth area is gratitude and savoring — pausing to appreciate what you have before reaching for more.",
-    },
-    allergy: {
-      trait: "Aimless",
-      description:
-        "People who drift through life with no goals and no desire to improve themselves likely confuse and frustrate you.",
-    },
-    growthTip:
-      "Celebrate one achievement fully before setting the next goal. Ambition is a journey, not just a destination.",
-  },
-  {
     id: "efficient",
     category: "work",
     coreQuality: {
       trait: "Efficient",
       description:
-        "You find the fastest path to results, eliminating waste and streamlining processes naturally.",
+        "You find the fastest path to results, consistently converting time and energy into tangible output while eliminating waste.",
     },
     pitfall: {
       trait: "Cutting Corners",
@@ -877,7 +773,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Thorough",
       description:
-        "You leave no stone unturned, ensuring comprehensive coverage and deep understanding before considering something complete.",
+        "You leave no stone unturned, thinking ahead and ensuring comprehensive preparation and deep understanding before considering something complete.",
     },
     pitfall: {
       trait: "Slow",
@@ -948,58 +844,6 @@ export const quadrants: QuadrantData[] = [
     },
     growthTip:
       "Break one of your own rules this week — deliberately. Notice how it feels to adapt. Discipline is a tool, not a cage.",
-  },
-  {
-    id: "quality-conscious",
-    category: "work",
-    coreQuality: {
-      trait: "Quality-conscious",
-      description:
-        "You hold the overall standard of work high, refusing to let subpar output represent you or your team — it's about the bar, not just the details.",
-    },
-    pitfall: {
-      trait: "Never Finished",
-      description:
-        "When overdone, quality standards become impossible — nothing ever feels complete because it could always be better.",
-    },
-    challenge: {
-      trait: "Pragmatic Completion",
-      description:
-        "Your growth area is shipping — understanding that a completed good project beats an endlessly polished perfect one.",
-    },
-    allergy: {
-      trait: "Mediocrity-accepting",
-      description:
-        "People who are satisfied with 'good enough' when excellence is achievable likely deeply disappoint you.",
-    },
-    growthTip:
-      "Set a 'ship date' before you start and honor it. Quality is important, but so is impact — and impact requires completion.",
-  },
-  {
-    id: "productive",
-    category: "work",
-    coreQuality: {
-      trait: "Productive",
-      description:
-        "You accomplish a remarkable amount, consistently converting your time and energy into tangible results.",
-    },
-    pitfall: {
-      trait: "Overworking",
-      description:
-        "When overdone, productivity becomes overworking — filling every moment with output until rest feels like failure.",
-    },
-    challenge: {
-      trait: "Rest and Renewal",
-      description:
-        "Your growth area is strategic rest — understanding that recovery isn't laziness, it's an investment in sustained performance.",
-    },
-    allergy: {
-      trait: "Lazy",
-      description:
-        "People who seem to waste their potential through inaction and lack of effort likely trigger your judgment.",
-    },
-    growthTip:
-      "Schedule rest with the same commitment you schedule work. Your productivity tomorrow depends on your recovery today.",
   },
   {
     id: "results-oriented",
@@ -1134,32 +978,6 @@ export const quadrants: QuadrantData[] = [
       "Being authentic includes being authentically kind. Before sharing a hard truth, ask: 'Is this necessary, and am I saying it with care?'",
   },
   {
-    id: "optimistic",
-    category: "personal",
-    coreQuality: {
-      trait: "Optimistic",
-      description:
-        "You see the bright side naturally, maintaining hope and positive expectations even in challenging circumstances.",
-    },
-    pitfall: {
-      trait: "Unrealistic",
-      description:
-        "When overdone, optimism becomes denial — ignoring real problems and dismissing legitimate concerns as negativity.",
-    },
-    challenge: {
-      trait: "Realistic Assessment",
-      description:
-        "Your growth area is grounded optimism — maintaining hope while honestly acknowledging obstacles and risks.",
-    },
-    allergy: {
-      trait: "Pessimistic",
-      description:
-        "People who always see the worst in everything and shoot down every idea with doom and gloom likely drain you.",
-    },
-    growthTip:
-      "When someone raises a concern, resist saying 'It'll be fine.' Instead, say 'That's worth thinking about' — then think about it.",
-  },
-  {
     id: "humble",
     category: "personal",
     coreQuality: {
@@ -1191,7 +1009,7 @@ export const quadrants: QuadrantData[] = [
     coreQuality: {
       trait: "Curious",
       description:
-        "You have an insatiable desire to learn and understand, asking questions others don't think to ask.",
+        "You have an insatiable desire to learn and understand, staying open to new perspectives and asking questions others don't think to ask.",
     },
     pitfall: {
       trait: "Nosy",
@@ -1210,32 +1028,6 @@ export const quadrants: QuadrantData[] = [
     },
     growthTip:
       "Before pursuing a new rabbit hole, ask: 'Will this serve my current priorities?' Curiosity is a superpower when aimed well.",
-  },
-  {
-    id: "spontaneous",
-    category: "personal",
-    coreQuality: {
-      trait: "Spontaneous",
-      description:
-        "You embrace the moment, responding to life with flexibility and a willingness to follow where opportunity leads.",
-    },
-    pitfall: {
-      trait: "Impulsive",
-      description:
-        "When overdone, spontaneity becomes impulsiveness — acting without thinking and creating chaos for yourself and others.",
-    },
-    challenge: {
-      trait: "Planning",
-      description:
-        "Your growth area is thoughtful preparation — giving important things a framework while keeping room for the unexpected.",
-    },
-    allergy: {
-      trait: "Over-planned",
-      description:
-        "People who plan every minute and can't handle any deviation from their schedule likely feel stifling to you.",
-    },
-    growthTip:
-      "For important commitments, try planning the first three steps. You can still improvise — but from a stronger starting point.",
   },
   {
     id: "self-aware",
@@ -1343,38 +1135,12 @@ export const quadrants: QuadrantData[] = [
       "After stating your position, pause and invite the other person's view. 'That's where I stand — what's your take?' shows strength and openness.",
   },
   {
-    id: "helpful",
-    category: "interpersonal",
-    coreQuality: {
-      trait: "Helpful",
-      description:
-        "You have a natural inclination to support and assist others, actively looking for ways to make their lives easier.",
-    },
-    pitfall: {
-      trait: "Meddling",
-      description:
-        "When overdone, helpfulness becomes intrusive — jumping in to fix things people didn't ask you to fix, undermining their autonomy.",
-    },
-    challenge: {
-      trait: "Stepping Back",
-      description:
-        "Your growth area is learning when to hold back — trusting others to solve their own problems and offering help only when invited.",
-    },
-    allergy: {
-      trait: "Indifferent",
-      description:
-        "People who show no interest in helping others, who shrug at someone's struggle, likely trigger strong irritation in you.",
-    },
-    growthTip:
-      "Before jumping in, ask: 'Would you like help with this, or would you rather work through it yourself?' Respect their agency.",
-  },
-  {
     id: "considerate",
     category: "interpersonal",
     coreQuality: {
       trait: "Considerate",
       description:
-        "You are naturally thoughtful and mindful of others' needs, anticipating how your actions affect those around you.",
+        "You are naturally thoughtful and mindful of others' needs, treating everyone with dignity and anticipating how your actions affect those around you.",
     },
     pitfall: {
       trait: "Self-neglecting",
@@ -1393,32 +1159,6 @@ export const quadrants: QuadrantData[] = [
     },
     growthTip:
       "Practice stating one personal need per day without apologizing for it. Consideration for others works best when it includes you.",
-  },
-  {
-    id: "respectful",
-    category: "interpersonal",
-    coreQuality: {
-      trait: "Respectful",
-      description:
-        "You value the contributions and differences of others, treating everyone with dignity regardless of status or role.",
-    },
-    pitfall: {
-      trait: "Deferential",
-      description:
-        "When overdone, respect becomes excessive deference — never challenging ideas, even bad ones, out of politeness.",
-    },
-    challenge: {
-      trait: "Constructive Challenge",
-      description:
-        "Your growth area is learning to respectfully push back — understanding that disagreeing with an idea is not disrespecting the person.",
-    },
-    allergy: {
-      trait: "Disrespectful",
-      description:
-        "People who dismiss others, belittle contributions, or show contempt for those they consider 'beneath them' trigger your deepest frustration.",
-    },
-    growthTip:
-      "Practice prefacing challenges with acknowledgment: 'I appreciate that perspective — here's where I see it differently.' Respect and honesty can coexist.",
   },
   {
     id: "tolerant",
@@ -1447,32 +1187,6 @@ export const quadrants: QuadrantData[] = [
       "Ask yourself: 'Am I being tolerant, or am I avoiding a difficult conversation?' True tolerance has boundaries — it doesn't mean accepting everything.",
   },
   {
-    id: "persevering",
-    category: "work",
-    coreQuality: {
-      trait: "Persevering",
-      description:
-        "You keep going when the road is long and monotonous, sustaining effort over weeks and months where others would quit.",
-    },
-    pitfall: {
-      trait: "Grinding",
-      description:
-        "When overdone, perseverance becomes grinding — refusing to pivot even when the path is clearly no longer working.",
-    },
-    challenge: {
-      trait: "Strategic Quitting",
-      description:
-        "Your growth area is knowing when to stop — recognizing that sometimes the wisest move is to let go and redirect your energy.",
-    },
-    allergy: {
-      trait: "Quitter",
-      description:
-        "People who give up at the first sign of difficulty, who abandon commitments when things get hard, deeply frustrate you.",
-    },
-    growthTip:
-      "Set regular 'is this still worth it?' checkpoints. Perseverance is a strength, but only when the destination still matters.",
-  },
-  {
     id: "pragmatic",
     category: "work",
     coreQuality: {
@@ -1499,64 +1213,12 @@ export const quadrants: QuadrantData[] = [
       "When you catch yourself saying 'that'll never work,' pause and ask 'what would need to be true for this to work?' Give ideas a chance before filtering.",
   },
   {
-    id: "prepared",
-    category: "work",
-    coreQuality: {
-      trait: "Prepared",
-      description:
-        "You think ahead and anticipate what's coming, arriving ready with plans, materials, and contingencies so nothing catches you off guard.",
-    },
-    pitfall: {
-      trait: "Over-preparing",
-      description:
-        "When overdone, preparedness becomes procrastination-by-planning — spending so long getting ready that you never actually start.",
-    },
-    challenge: {
-      trait: "Improvisation",
-      description:
-        "Your growth area is learning to act without a full plan — trusting your ability to figure things out on the fly.",
-    },
-    allergy: {
-      trait: "Winging It",
-      description:
-        "People who walk into situations completely unprepared, who rely on charm over substance, deeply frustrate you.",
-    },
-    growthTip:
-      "Try one task this week with minimal preparation. Notice that you can handle more uncertainty than you think.",
-  },
-  {
-    id: "concise",
-    category: "work",
-    coreQuality: {
-      trait: "Concise",
-      description:
-        "You are brief but comprehensive in communication, distilling complex ideas into clear, focused messages.",
-    },
-    pitfall: {
-      trait: "Terse",
-      description:
-        "When overdone, conciseness becomes curtness — stripping away so much context that people feel dismissed or confused.",
-    },
-    challenge: {
-      trait: "Elaboration",
-      description:
-        "Your growth area is learning when more context is needed — sometimes people need the story, not just the headline.",
-    },
-    allergy: {
-      trait: "Long-winded",
-      description:
-        "People who ramble endlessly, who take ten minutes to make a one-minute point, trigger your deepest impatience.",
-    },
-    growthTip:
-      "Match your communication depth to the audience. A quick update deserves brevity; a complex decision deserves more narrative.",
-  },
-  {
     id: "flexible",
     category: "personal",
     coreQuality: {
       trait: "Flexible",
       description:
-        "You adapt readily to change and new circumstances, staying effective even when plans shift beneath you.",
+        "You adapt readily to change, embracing the unplanned and staying effective even when circumstances shift beneath you.",
     },
     pitfall: {
       trait: "Non-committal",
@@ -1575,32 +1237,6 @@ export const quadrants: QuadrantData[] = [
     },
     growthTip:
       "Identify three things that are non-negotiable for you. Flexibility is a superpower — but it needs an anchor.",
-  },
-  {
-    id: "open-minded",
-    category: "personal",
-    coreQuality: {
-      trait: "Open-minded",
-      description:
-        "You are receptive to new information, experimental ideas, and different perspectives, welcoming what others might dismiss.",
-    },
-    pitfall: {
-      trait: "Uncritical",
-      description:
-        "When overdone, openness becomes gullibility — accepting every idea as equally valid without healthy skepticism.",
-    },
-    challenge: {
-      trait: "Critical Evaluation",
-      description:
-        "Your growth area is developing discernment — learning to filter ideas through evidence and logic while staying open to being surprised.",
-    },
-    allergy: {
-      trait: "Closed-minded",
-      description:
-        "People who refuse to consider new information, who dismiss ideas before hearing them out, trigger deep frustration in you.",
-    },
-    growthTip:
-      "After exploring a new idea, ask yourself: 'What evidence would change my mind about this — in either direction?' Openness includes being open to saying no.",
   },
 ];
 

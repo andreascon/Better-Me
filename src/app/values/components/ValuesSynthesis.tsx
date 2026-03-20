@@ -59,7 +59,7 @@ export default function ValuesSynthesis({
 
   if (values.length === 0) {
     return (
-      <div className="py-12 text-center text-muted">
+      <div className="py-12 text-center text-lg text-muted">
         Synthesizing your values...
       </div>
     );
@@ -71,7 +71,7 @@ export default function ValuesSynthesis({
         <h2 className="mb-3 text-2xl font-bold text-foreground">
           Your Emerging Values
         </h2>
-        <p className="text-sm leading-relaxed text-muted">
+        <p className="text-lg leading-relaxed text-muted">
           Based on your selections, here are the values that emerged. You can
           rename them to make them your own.
         </p>
@@ -84,7 +84,7 @@ export default function ValuesSynthesis({
             className="rounded-2xl border border-card-border bg-card-bg p-6"
           >
             <div className="mb-4">
-              <label className="mb-1 block text-xs font-medium text-muted">
+              <label className="mb-1 block text-base font-medium text-muted">
                 Value name
               </label>
               <input
@@ -98,13 +98,13 @@ export default function ValuesSynthesis({
 
             <div className="space-y-2">
               {origins[i]?.map((o, j) => (
-                <p key={j} className="text-sm leading-relaxed text-muted">
+                <p key={j} className="text-lg leading-relaxed text-muted">
                   <span className="mr-1">{o.emoji}</span> {o.text}
                 </p>
               ))}
             </div>
 
-            <p className="mt-3 text-xs text-muted/60">
+            <p className="mt-3 text-base text-muted/60">
               Seeded from: {v.coreQualityTrait}
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function ValuesSynthesis({
         <button
           onClick={onFinish}
           disabled={values.length === 0}
-          className="rounded-full border border-accent bg-accent/10 px-6 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent/20 disabled:opacity-50"
+          className="rounded-full border border-accent bg-accent/10 px-6 py-3 text-lg font-medium text-accent transition-colors hover:bg-accent/20 disabled:opacity-50"
         >
           Continue to write your value statements &rarr;
         </button>

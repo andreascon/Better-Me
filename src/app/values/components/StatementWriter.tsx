@@ -88,7 +88,7 @@ export default function StatementWriter({
     <div className="mx-auto max-w-2xl px-6 py-12">
       {/* Progress */}
       <div className="mb-6 text-center">
-        <p className="mb-1 text-xs font-medium text-muted">
+        <p className="mb-1 text-base font-medium text-muted">
           Value {index + 1} of {total}
         </p>
         <h2 className="mb-2 text-3xl font-bold text-foreground">
@@ -98,12 +98,12 @@ export default function StatementWriter({
 
       {/* Source context — allergy, pitfall, and strength insight */}
       <div className="mb-8 rounded-2xl border border-card-border bg-card-bg p-5">
-        <h3 className="mb-3 text-sm font-semibold text-foreground">
+        <h3 className="mb-3 text-lg font-semibold text-foreground">
           Why this value matters to you
         </h3>
 
         {sourceContext.coreQualityDescription && (
-          <p className="mb-4 text-sm leading-relaxed text-muted">
+          <p className="mb-4 text-lg leading-relaxed text-muted">
             Your core strength is being <strong className="text-foreground">{value.coreQualityTrait}</strong>: {sourceContext.coreQualityDescription}
           </p>
         )}
@@ -111,7 +111,7 @@ export default function StatementWriter({
         {sourceContext.allergyLines.length > 0 && (
           <div className="mb-3">
             {sourceContext.allergyLines.map((a, i) => (
-              <p key={`a-${i}`} className="mb-1 text-sm text-muted">
+              <p key={`a-${i}`} className="mb-1 text-lg text-muted">
                 <span className="mr-1 text-quadrant-pitfall">&times;</span>
                 You&apos;re triggered by <strong className="text-foreground">&ldquo;{a.trait}&rdquo;</strong> &mdash; {a.description.charAt(0).toLowerCase() + a.description.slice(1)}
               </p>
@@ -122,7 +122,7 @@ export default function StatementWriter({
         {sourceContext.pitfallLines.length > 0 && (
           <div>
             {sourceContext.pitfallLines.map((p, i) => (
-              <p key={`p-${i}`} className="mb-1 text-sm text-muted">
+              <p key={`p-${i}`} className="mb-1 text-lg text-muted">
                 <span className="mr-1 text-amber-600">&bull;</span>
                 People say you can overdo it as <strong className="text-foreground">&ldquo;{p.trait}&rdquo;</strong> &mdash; {p.description.charAt(0).toLowerCase() + p.description.slice(1)}
               </p>
@@ -133,16 +133,16 @@ export default function StatementWriter({
 
       {/* Positive statements */}
       <div className="mb-8">
-        <h3 className="mb-1 text-sm font-semibold text-quadrant-quality">
+        <h3 className="mb-1 text-lg font-semibold text-quadrant-quality">
           Positive statements
         </h3>
-        <p className="mb-4 text-xs text-muted">
+        <p className="mb-4 text-lg text-muted">
           What commitment would you make to your future self to honour this
           value?
         </p>
         {s.positive.map((text, i) => (
           <div key={i} className="mb-3 flex gap-2">
-            <span className="mt-2.5 shrink-0 text-sm text-quadrant-quality">
+            <span className="mt-2.5 shrink-0 text-lg text-quadrant-quality">
               +
             </span>
             <textarea
@@ -154,7 +154,7 @@ export default function StatementWriter({
                   : "Another behaviour (optional)"
               }
               rows={2}
-              className="w-full resize-none rounded-lg border border-card-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent"
+              className="w-full resize-none rounded-lg border border-card-border bg-background px-3 py-2 text-lg text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent"
             />
           </div>
         ))}
@@ -162,15 +162,15 @@ export default function StatementWriter({
 
       {/* Boundary statement */}
       <div className="mb-8">
-        <h3 className="mb-1 text-sm font-semibold text-quadrant-pitfall">
+        <h3 className="mb-1 text-lg font-semibold text-quadrant-pitfall">
           Boundary statement
         </h3>
-        <p className="mb-4 text-xs text-muted">
+        <p className="mb-4 text-lg text-muted">
           What behaviour connected to this value will you never accept — from
           others or yourself?
         </p>
         <div className="flex gap-2">
-          <span className="mt-2.5 shrink-0 text-sm text-quadrant-pitfall">
+          <span className="mt-2.5 shrink-0 text-lg text-quadrant-pitfall">
             -
           </span>
           <textarea
@@ -178,7 +178,7 @@ export default function StatementWriter({
             onChange={(e) => update({ boundary: e.target.value })}
             placeholder={sourceContext.suggestedBoundary}
             rows={2}
-            className="w-full resize-none rounded-lg border border-card-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent"
+            className="w-full resize-none rounded-lg border border-card-border bg-background px-3 py-2 text-lg text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent"
           />
         </div>
       </div>
@@ -188,7 +188,7 @@ export default function StatementWriter({
         <button
           onClick={onPrev}
           disabled={index === 0}
-          className="rounded-full border border-card-border px-5 py-2.5 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-foreground disabled:opacity-30"
+          className="rounded-full border border-card-border px-5 py-2.5 text-lg font-medium text-muted transition-colors hover:border-accent hover:text-foreground disabled:opacity-30"
         >
           &larr; Previous
         </button>
@@ -197,7 +197,7 @@ export default function StatementWriter({
           {/* Skip to end */}
           <button
             onClick={onFinish}
-            className="text-xs text-muted transition-colors hover:text-foreground"
+            className="text-base text-muted transition-colors hover:text-foreground"
           >
             Skip to summary
           </button>
@@ -205,14 +205,14 @@ export default function StatementWriter({
           {isLast ? (
             <button
               onClick={onFinish}
-              className="rounded-full border border-accent bg-accent/10 px-6 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
+              className="rounded-full border border-accent bg-accent/10 px-6 py-2.5 text-lg font-medium text-accent transition-colors hover:bg-accent/20"
             >
               See summary &rarr;
             </button>
           ) : (
             <button
               onClick={onNext}
-              className="rounded-full border border-card-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent"
+              className="rounded-full border border-card-border px-5 py-2.5 text-lg font-medium text-foreground transition-colors hover:border-accent"
             >
               Next value &rarr;
             </button>

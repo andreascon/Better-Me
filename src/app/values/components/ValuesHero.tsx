@@ -13,14 +13,14 @@ export default function ValuesHero({ onStart, disabled }: ValuesHeroProps) {
       <div className="mx-auto max-w-3xl px-6 py-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-accent"
+          className="inline-flex items-center gap-1 text-lg text-muted transition-colors hover:text-accent"
         >
           &larr; Back to Better-Me
         </Link>
       </div>
 
       <div className="mx-auto max-w-3xl px-6 pb-16 pt-4 text-center">
-        <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-medium text-accent">
+        <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-base font-medium text-accent">
           Values Discovery
         </span>
         <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
@@ -45,7 +45,7 @@ export default function ValuesHero({ onStart, disabled }: ValuesHeroProps) {
         <button
           onClick={onStart}
           disabled={disabled}
-          className="mt-10 inline-flex items-center gap-2 rounded-full border border-card-border bg-card-bg px-6 py-3 text-sm font-medium text-foreground transition-all hover:border-accent hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-card-border disabled:hover:shadow-none"
+          className="mt-10 inline-flex items-center gap-2 rounded-full border border-card-border bg-card-bg px-6 py-3 text-lg font-medium text-foreground transition-all hover:border-accent hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-card-border disabled:hover:shadow-none"
         >
           Get Started &darr;
         </button>
