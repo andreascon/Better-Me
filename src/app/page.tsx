@@ -75,6 +75,15 @@ const apps: AppCardProps[] = [
     href: "/values",
   },
   {
+    title: "Communication Style",
+    description:
+      "Understand how you communicate through two key dimensions \u2014 assertiveness and responsiveness. Discover whether you\u2019re an Analytical, Driver, Amiable, or Expressive communicator.",
+    icon: "\uD83E\uDD1D",
+    category: "Communication",
+    status: "available",
+    href: "/interpersonal",
+  },
+  {
     title: "Habit Tracker",
     description:
       "Build lasting habits with daily tracking, streaks, and gentle reminders to keep you on course.",

@@ -27,20 +27,20 @@ const cardConfig = [
     bgClass: "bg-quadrant-pitfall-light",
   },
   {
-    key: "challenge" as const,
-    label: "Challenge",
-    emoji: "🌱",
-    colorClass: "text-quadrant-challenge",
-    borderClass: "border-quadrant-challenge/30",
-    bgClass: "bg-quadrant-challenge-light",
-  },
-  {
     key: "allergy" as const,
     label: "Allergy",
     emoji: "😤",
     colorClass: "text-quadrant-allergy",
     borderClass: "border-quadrant-allergy/30",
     bgClass: "bg-quadrant-allergy-light",
+  },
+  {
+    key: "challenge" as const,
+    label: "Challenge",
+    emoji: "🌱",
+    colorClass: "text-quadrant-challenge",
+    borderClass: "border-quadrant-challenge/30",
+    bgClass: "bg-quadrant-challenge-light",
   },
 ];
 
