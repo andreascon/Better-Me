@@ -1,5 +1,6 @@
 export type ValuesPhase =
   | "intro"
+  | "picking-strengths"
   | "picking-allergies"
   | "picking-pitfalls"
   | "cost-test"
@@ -29,6 +30,7 @@ export interface PersonalValue {
 
 export interface ValuesState {
   phase: ValuesPhase;
+  selectedStrengthIds: string[];
   selectedAllergyIds: string[];
   selectedPitfallIds: string[];
   values: PersonalValue[];
@@ -37,6 +39,7 @@ export interface ValuesState {
 
 export type ValuesAction =
   | { type: "START" }
+  | { type: "FINISH_STRENGTHS"; selectedIds: string[] }
   | { type: "FINISH_ALLERGIES"; selectedIds: string[] }
   | { type: "FINISH_PITFALLS"; selectedIds: string[] }
   | { type: "FINISH_COST_TEST"; survivingAllergyIds: string[] }

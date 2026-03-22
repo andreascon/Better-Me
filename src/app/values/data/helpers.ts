@@ -12,6 +12,16 @@ export function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+/** Extract all core qualities (strengths) from quadrant data as swipe-ready items */
+export function getStrengths(quadrants: QuadrantData[]): SwipeItem[] {
+  return quadrants.map((q) => ({
+    id: q.id,
+    trait: q.coreQuality.trait,
+    description: q.coreQuality.description,
+    category: categoryLabels[q.category],
+  }));
+}
+
 /** Extract all allergies from quadrant data as swipe-ready items */
 export function getAllergies(quadrants: QuadrantData[]): SwipeItem[] {
   return quadrants.map((q) => ({

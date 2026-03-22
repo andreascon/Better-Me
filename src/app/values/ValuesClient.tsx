@@ -2,7 +2,7 @@
 
 import { useReducer, useCallback, useMemo } from "react";
 import { quadrants } from "../ofman/data/quadrants";
-import { getAllergies, getPitfalls } from "./data/helpers";
+import { getStrengths, getAllergies, getPitfalls } from "./data/helpers";
 import type {
   ValuesState,
   ValuesAction,
@@ -21,6 +21,7 @@ import ValuesSummary from "./components/ValuesSummary";
 /* ── Step indicator ────────────────────────────────────── */
 
 const steps: { label: string; phases: ValuesPhase[] }[] = [
+  { label: "Strengths", phases: ["picking-strengths"] },
   { label: "Triggers", phases: ["picking-allergies"] },
   { label: "Overdoing", phases: ["picking-pitfalls"] },
   { label: "Cost test", phases: ["cost-test"] },
@@ -88,6 +89,7 @@ function StepIndicator({ phase }: { phase: ValuesPhase }) {
 
 const initialState: ValuesState = {
   phase: "intro",
+  selectedStrengthIds: [],
   selectedAllergyIds: [],
   selectedPitfallIds: [],
   values: [],
@@ -97,7 +99,14 @@ const initialState: ValuesState = {
 function reducer(state: ValuesState, action: ValuesAction): ValuesState {
   switch (action.type) {
     case "START":
-      return { ...state, phase: "picking-allergies" };
+      return { ...state, phase: "picking-strengths" };
+
+    case "FINISH_STRENGTHS":
+      return {
+        ...state,
+        phase: "picking-allergies",
+        selectedStrengthIds: action.selectedIds,
+      };
 
     case "FINISH_ALLERGIES":
       return {
@@ -187,6 +196,7 @@ function reducer(state: ValuesState, action: ValuesAction): ValuesState {
 export default function ValuesClient() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const strengthItems = useMemo(() => getStrengths(quadrants), []);
   const allergyItems = useMemo(() => getAllergies(quadrants), []);
   const pitfallItems = useMemo(() => getPitfalls(quadrants), []);
 
@@ -202,6 +212,14 @@ export default function ValuesClient() {
     dispatch({ type: "START" });
     scrollToExercise();
   }, [scrollToExercise]);
+
+  const handleStrengthComplete = useCallback(
+    (ids: string[]) => {
+      dispatch({ type: "FINISH_STRENGTHS", selectedIds: ids });
+      scrollToExercise();
+    },
+    [scrollToExercise]
+  );
 
   const handleAllergyComplete = useCallback(
     (ids: string[]) => {
@@ -273,6 +291,18 @@ export default function ValuesClient() {
 
       <div id="values-exercise">
         <StepIndicator phase={state.phase} />
+
+        {state.phase === "picking-strengths" && (
+          <SwipeCards
+            items={strengthItems}
+            heading="What are your strengths?"
+            subheading="Swipe through these qualities. Which ones do you genuinely identify with? Pick the ones that feel most like you — not what you aspire to, but who you actually are."
+            selectLabel="That's me"
+            skipLabel="Not really"
+            minSelections={5}
+            onComplete={handleStrengthComplete}
+          />
+        )}
 
         {state.phase === "picking-allergies" && (
           <SwipeCards
