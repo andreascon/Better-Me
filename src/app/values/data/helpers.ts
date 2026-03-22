@@ -48,7 +48,7 @@ const emptyStatements: ValueStatement = {
 };
 
 /**
- * Synthesize personal values from selected allergy and pitfall IDs.
+ * Synthesize personal values from selected strength, allergy and pitfall IDs.
  *
  * Logic:
  * 1. Each selected item maps back to a quadrant → core quality.
@@ -57,31 +57,48 @@ const emptyStatements: ValueStatement = {
  * 4. Value name defaults to the core quality trait.
  */
 export function synthesizeValues(
+  strengthIds: string[],
   allergyIds: string[],
   pitfallIds: string[],
   quadrants: QuadrantData[]
 ): PersonalValue[] {
   const byQuadrant = new Map<
     string,
-    { allergyIds: string[]; pitfallIds: string[]; quadrant: QuadrantData }
+    {
+      strengthIds: string[];
+      allergyIds: string[];
+      pitfallIds: string[];
+      quadrant: QuadrantData;
+    }
   >();
 
-  for (const id of allergyIds) {
-    const q = quadrants.find((q) => q.id === id);
-    if (!q) continue;
+  const ensureEntry = (id: string) => {
     if (!byQuadrant.has(id)) {
-      byQuadrant.set(id, { allergyIds: [], pitfallIds: [], quadrant: q });
+      const q = quadrants.find((q) => q.id === id);
+      if (!q) return null;
+      byQuadrant.set(id, {
+        strengthIds: [],
+        allergyIds: [],
+        pitfallIds: [],
+        quadrant: q,
+      });
     }
-    byQuadrant.get(id)!.allergyIds.push(id);
+    return byQuadrant.get(id)!;
+  };
+
+  for (const id of strengthIds) {
+    const entry = ensureEntry(id);
+    if (entry) entry.strengthIds.push(id);
+  }
+
+  for (const id of allergyIds) {
+    const entry = ensureEntry(id);
+    if (entry) entry.allergyIds.push(id);
   }
 
   for (const id of pitfallIds) {
-    const q = quadrants.find((q) => q.id === id);
-    if (!q) continue;
-    if (!byQuadrant.has(id)) {
-      byQuadrant.set(id, { allergyIds: [], pitfallIds: [], quadrant: q });
-    }
-    byQuadrant.get(id)!.pitfallIds.push(id);
+    const entry = ensureEntry(id);
+    if (entry) entry.pitfallIds.push(id);
   }
 
   const values: PersonalValue[] = [];
@@ -89,6 +106,7 @@ export function synthesizeValues(
   for (const [, entry] of byQuadrant) {
     values.push({
       name: entry.quadrant.coreQuality.trait,
+      sourceStrengthIds: entry.strengthIds,
       sourceAllergyIds: entry.allergyIds,
       sourcePitfallIds: entry.pitfallIds,
       coreQualityTrait: entry.quadrant.coreQuality.trait,

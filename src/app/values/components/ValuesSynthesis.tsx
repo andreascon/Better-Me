@@ -6,6 +6,7 @@ import type { PersonalValue } from "../data/types";
 import { synthesizeValues } from "../data/helpers";
 
 interface ValuesSynthesisProps {
+  strengthIds: string[];
   allergyIds: string[];
   pitfallIds: string[];
   values: PersonalValue[];
@@ -15,6 +16,7 @@ interface ValuesSynthesisProps {
 }
 
 export default function ValuesSynthesis({
+  strengthIds,
   allergyIds,
   pitfallIds,
   values,
@@ -25,7 +27,12 @@ export default function ValuesSynthesis({
   // Synthesize on first render
   useEffect(() => {
     if (values.length === 0) {
-      const synth = synthesizeValues(allergyIds, pitfallIds, quadrants);
+      const synth = synthesizeValues(
+        strengthIds,
+        allergyIds,
+        pitfallIds,
+        quadrants
+      );
       onSetValues(synth);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,6 +42,15 @@ export default function ValuesSynthesis({
   const origins = useMemo(() => {
     return values.map((v) => {
       const lines: { emoji: string; text: string }[] = [];
+      for (const id of v.sourceStrengthIds) {
+        const q = quadrants.find((q) => q.id === id);
+        if (q) {
+          lines.push({
+            emoji: "\uD83D\uDCAA",
+            text: `You identified "${q.coreQuality.trait}" as a core strength — this is who you genuinely are`,
+          });
+        }
+      }
       for (const id of v.sourcePitfallIds) {
         const q = quadrants.find((q) => q.id === id);
         if (q) {

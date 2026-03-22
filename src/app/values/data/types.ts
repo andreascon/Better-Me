@@ -22,8 +22,9 @@ export interface ValueStatement {
 
 export interface PersonalValue {
   name: string; // user-editable name (seeded from core quality)
-  sourceAllergyIds: string[]; // quadrant IDs that fed this value
-  sourcePitfallIds: string[]; // quadrant IDs that fed this value
+  sourceStrengthIds: string[]; // quadrant IDs selected as strengths
+  sourceAllergyIds: string[]; // quadrant IDs selected as allergies
+  sourcePitfallIds: string[]; // quadrant IDs selected as pitfalls
   coreQualityTrait: string; // the Ofman core quality this maps to
   statements: ValueStatement;
 }

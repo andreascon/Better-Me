@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { quadrants } from "../../ofman/data/quadrants";
 
 interface CostTestProps {
+  strengthIds: string[];
   allergyIds: string[];
   pitfallIds: string[];
   onFinish: (survivingAllergyIds: string[]) => void;
@@ -14,41 +15,62 @@ interface AllergyDetail {
   allergyTrait: string;
   allergyDescription: string;
   coreQualityTrait: string;
-  /** Whether this allergy was directly selected in the allergy phase */
-  directlySelected: boolean;
-  /** Whether this quadrant was also selected via pitfall */
-  hasPitfall: boolean;
+  /** How many times this quadrant was selected across phases (1-3) */
+  selectionCount: number;
+  /** Labels for how this value was surfaced */
+  sourceLabels: string[];
 }
 
 export default function CostTest({
+  strengthIds,
   allergyIds,
   pitfallIds,
   onFinish,
 }: CostTestProps) {
-  // Gather ALL unique quadrant IDs from both allergy and pitfall selections,
-  // then show each quadrant's allergy for the cost test
+  // Gather ALL unique quadrant IDs from all three selection phases,
+  // then sort so values selected multiple times bubble to the top
   const allergyDetails = useMemo<AllergyDetail[]>(() => {
+    const strengthSet = new Set(strengthIds);
     const allergySet = new Set(allergyIds);
     const pitfallSet = new Set(pitfallIds);
 
-    // Combine all unique quadrant IDs
-    const allQuadrantIds = new Set([...allergyIds, ...pitfallIds]);
+    // Combine all unique quadrant IDs from all three phases
+    const allQuadrantIds = new Set([
+      ...strengthIds,
+      ...allergyIds,
+      ...pitfallIds,
+    ]);
 
-    return Array.from(allQuadrantIds)
+    const details = Array.from(allQuadrantIds)
       .map((id) => {
         const q = quadrants.find((q) => q.id === id);
         if (!q) return null;
+
+        const sourceLabels: string[] = [];
+        if (strengthSet.has(id)) sourceLabels.push("core strength");
+        if (allergySet.has(id)) sourceLabels.push("allergy");
+        if (pitfallSet.has(id)) sourceLabels.push("pitfall");
+
         return {
           id,
           allergyTrait: q.allergy.trait,
           allergyDescription: q.allergy.description,
           coreQualityTrait: q.coreQuality.trait,
-          directlySelected: allergySet.has(id),
-          hasPitfall: pitfallSet.has(id),
+          selectionCount: sourceLabels.length,
+          sourceLabels,
         };
       })
       .filter(Boolean) as AllergyDetail[];
-  }, [allergyIds, pitfallIds]);
+
+    // Sort: most-selected first, then alphabetically by trait
+    details.sort((a, b) => {
+      if (b.selectionCount !== a.selectionCount)
+        return b.selectionCount - a.selectionCount;
+      return a.allergyTrait.localeCompare(b.allergyTrait);
+    });
+
+    return details;
+  }, [strengthIds, allergyIds, pitfallIds]);
 
   const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
 
@@ -106,12 +128,19 @@ export default function CostTest({
                 <p className="mt-1 text-lg leading-relaxed text-muted">
                   {item.allergyDescription}
                 </p>
-                <p className="mt-2 text-base text-muted/60">
-                  Linked to your value:{" "}
-                  <span className="font-medium text-quadrant-quality">
-                    {item.coreQualityTrait}
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <span className="text-base text-muted/60">
+                    Linked to your value:{" "}
+                    <span className="font-medium text-quadrant-quality">
+                      {item.coreQualityTrait}
+                    </span>
                   </span>
-                </p>
+                  {item.selectionCount > 1 && (
+                    <span className="rounded-full bg-quadrant-quality/15 px-2.5 py-0.5 text-sm font-medium text-quadrant-quality">
+                      {item.sourceLabels.join(" + ")}
+                    </span>
+                  )}
+                </div>
               </div>
             </label>
           );
